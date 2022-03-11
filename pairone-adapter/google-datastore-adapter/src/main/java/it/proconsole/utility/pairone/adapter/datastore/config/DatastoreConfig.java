@@ -13,8 +13,14 @@ import org.springframework.context.annotation.Configuration;
 public class DatastoreConfig {
   @Bean
   public DeveloperRepository datastoreDeveloperRepository(
-          DeveloperEntityRepository developerEntityRepository
+          DeveloperEntityRepository developerEntityRepository,
+          DeveloperAdapter developerAdapter
   ) {
-    return new DatastoreDeveloperRepository(developerEntityRepository, new DeveloperAdapter());
+    return new DatastoreDeveloperRepository(developerEntityRepository, developerAdapter);
+  }
+
+  @Bean
+  public DeveloperAdapter developerAdapter() {
+    return new DeveloperAdapter();
   }
 }

@@ -1,7 +1,7 @@
 package it.proconsole.utility.pairone.adapter.datastore.repository;
 
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.DeveloperAdapter;
-import it.proconsole.utility.pairone.adapter.datastore.repository.datastore.DeveloperEntityRepository;
+import it.proconsole.utility.pairone.adapter.datastore.repository.crud.DeveloperEntityRepository;
 import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 

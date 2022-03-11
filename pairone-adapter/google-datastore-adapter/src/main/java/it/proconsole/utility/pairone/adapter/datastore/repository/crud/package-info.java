@@ -1,6 +1,6 @@
 @NonNullApi
 @NonNullFields
-package it.proconsole.utility.pairone.adapter.datastore.repository.datastore;
+package it.proconsole.utility.pairone.adapter.datastore.repository.crud;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

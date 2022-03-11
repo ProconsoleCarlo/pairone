@@ -1,4 +1,4 @@
-package it.proconsole.utility.pairone.adapter.datastore.repository.datastore;
+package it.proconsole.utility.pairone.adapter.datastore.repository.crud;
 
 import com.google.cloud.spring.data.datastore.repository.DatastoreRepository;
 import it.proconsole.utility.pairone.adapter.datastore.model.DeveloperEntity;

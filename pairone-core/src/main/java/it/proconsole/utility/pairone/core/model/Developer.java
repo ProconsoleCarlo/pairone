@@ -1,5 +1,7 @@
 package it.proconsole.utility.pairone.core.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import org.springframework.lang.Nullable;
 
 import java.util.Objects;
@@ -9,6 +11,7 @@ public class Developer {
   private final Long id;
   private final String nickName;
 
+  @JsonCreator
   public Developer(@Nullable Long id, String nickName) {
     this.id = id;
     this.nickName = nickName;
@@ -18,11 +21,13 @@ public class Developer {
     this(null, nickName);
   }
 
+  @JsonGetter
   @Nullable
   public Long id() {
     return id;
   }
 
+  @JsonGetter
   public String nickName() {
     return nickName;
   }

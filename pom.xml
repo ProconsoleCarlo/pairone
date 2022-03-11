@@ -6,6 +6,7 @@
   <modules>
     <module>pairone-adapter</module>
     <module>pairone-rest</module>
+    <module>pairone-core</module>
   </modules>
   <parent> 
     <groupId>org.springframework.boot</groupId>  

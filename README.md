@@ -11,7 +11,7 @@
 
 ## Requirements
 
-- Java 17
+- Java 11
 
 ## Install
 
@@ -22,7 +22,15 @@ mvn clean install
 ## Usage
 
 ```sh
+cd pairone-rest
 mvn spring-boot:run
+```
+
+## Deploy
+
+```sh
+cd pairone-rest
+mvn package appengine:deploy -Dapp.deploy.projectId=pairone
 ```
 
 ## 🤝 Contributing

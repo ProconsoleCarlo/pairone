@@ -2,19 +2,22 @@ package it.proconsole.utility.pairone.adapter.datastore.model;
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
 import org.springframework.data.annotation.Id;
+import org.springframework.lang.Nullable;
 
 import java.util.Objects;
 
-@Entity
+@Entity(name = "developers")
 public class DeveloperEntity {
   @Id
+  @Nullable
   private Long id;
   private String nickName;
 
   public DeveloperEntity() {
+    this.nickName = "";
   }
 
-  public DeveloperEntity(Long id, String nickName) {
+  public DeveloperEntity(@Nullable Long id, String nickName) {
     this.id = id;
     this.nickName = nickName;
   }
@@ -23,6 +26,7 @@ public class DeveloperEntity {
     this.nickName = nickName;
   }
 
+  @Nullable
   public Long getId() {
     return id;
   }

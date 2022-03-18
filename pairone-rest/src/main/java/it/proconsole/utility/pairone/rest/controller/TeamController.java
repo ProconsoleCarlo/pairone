@@ -3,6 +3,8 @@ package it.proconsole.utility.pairone.rest.controller;
 import it.proconsole.utility.pairone.core.model.Team;
 import it.proconsole.utility.pairone.core.repository.TeamRepository;
 import it.proconsole.utility.pairone.rest.exception.TeamNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,5 +29,10 @@ public class TeamController {
   @PostMapping
   public Team saveTeam(@RequestBody Team team) {
     return teamRepository.save(team);
+  }
+
+  @ExceptionHandler(TeamNotFoundException.class)
+  public ResponseEntity<String> notFound(TeamNotFoundException e) {
+    return ResponseEntity.notFound().build();
   }
 }

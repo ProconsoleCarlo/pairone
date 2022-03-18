@@ -1,0 +1,14 @@
+{
+  "id": null,
+  "name": "An awesome team name",
+  "developers": [
+    {
+      "id": 1,
+      "nickName": "Carlo"
+    },
+    {
+      "id": null,
+      "nickName": "Andrea"
+    }
+  ]
+}

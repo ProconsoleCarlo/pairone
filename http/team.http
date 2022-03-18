@@ -1,0 +1,25 @@
+### getTeam
+GET {{baseUrl}}/team
+Accept: application/json
+
+### saveTeam
+POST {{baseUrl}}/team
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": null,
+    "name": "An awesome team name",
+    "developers": [
+      {
+        "id": 1,
+        "nickName": "Carlo"
+      },
+      {
+        "id": 2,
+        "nickName": "Andrea"
+      }
+    ]
+  }
+]

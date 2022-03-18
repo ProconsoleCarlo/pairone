@@ -26,9 +26,10 @@ public class DatastoreConfig {
   @Bean
   public TeamRepository datastoreTeamRepository(
           TeamEntityRepository teamEntityRepository,
+          DeveloperEntityRepository developerEntityRepository,
           DeveloperAdapter developerAdapter
   ) {
-    return new DatastoreTeamRepository(teamEntityRepository, new TeamAdapter(developerAdapter));
+    return new DatastoreTeamRepository(teamEntityRepository, developerEntityRepository, new TeamAdapter(developerAdapter), developerAdapter);
   }
 
   @Bean

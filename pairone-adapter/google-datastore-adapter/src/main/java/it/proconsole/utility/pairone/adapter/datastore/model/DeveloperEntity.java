@@ -12,6 +12,8 @@ public class DeveloperEntity {
   @Nullable
   private Long id;
   private String nickName;
+  @Nullable
+  private Long teamId;
 
   public DeveloperEntity() {
     this.nickName = "";
@@ -43,16 +45,25 @@ public class DeveloperEntity {
     this.nickName = nickName;
   }
 
+  @Nullable
+  public Long getTeamId() {
+    return teamId;
+  }
+
+  public void setTeamId(Long teamId) {
+    this.teamId = teamId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof DeveloperEntity)) return false;
     DeveloperEntity that = (DeveloperEntity) o;
-    return Objects.equals(id, that.id) && nickName.equals(that.nickName);
+    return Objects.equals(id, that.id) && nickName.equals(that.nickName) && Objects.equals(teamId, that.teamId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nickName);
+    return Objects.hash(id, nickName, teamId);
   }
 }

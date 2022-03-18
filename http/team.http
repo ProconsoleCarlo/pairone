@@ -1,6 +1,23 @@
-### getTeam
+### getTeams
 GET {{baseUrl}}/team
 Accept: application/json
+
+### getTeam
+GET {{baseUrl}}/team/{{teamId}}
+Accept: application/json
+
+### createTeam
+PUT {{baseUrl}}/team
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": null,
+    "name": "An awesome team name"
+  }
+]
+
 
 ### saveTeam
 POST {{baseUrl}}/team
@@ -9,7 +26,7 @@ Content-Type: application/json
 
 [
   {
-    "id": null,
+    "id": 5701666712059904,
     "name": "An awesome team name",
     "developers": [
       {

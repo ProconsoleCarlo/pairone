@@ -7,9 +7,7 @@ import it.proconsole.utility.pairone.adapter.datastore.repository.crud.Developer
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.TeamEntityRepository;
 import it.proconsole.utility.pairone.core.model.Team;
 import it.proconsole.utility.pairone.core.repository.TeamRepository;
-import org.apache.commons.lang3.NotImplementedException;
 
-import java.util.List;
 import java.util.Optional;
 
 public class DatastoreTeamRepository implements TeamRepository {
@@ -28,11 +26,6 @@ public class DatastoreTeamRepository implements TeamRepository {
     this.developerEntityRepository = developerEntityRepository;
     this.teamAdapter = teamAdapter;
     this.developerAdapter = developerAdapter;
-  }
-
-  @Override
-  public List<Team> findAll() {
-    throw new NotImplementedException();
   }
 
   @Override

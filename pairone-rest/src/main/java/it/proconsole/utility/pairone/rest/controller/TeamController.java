@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/team")
 public class TeamController {
@@ -21,18 +19,13 @@ public class TeamController {
     this.teamRepository = datastoreTeamRepository;
   }
 
-  @GetMapping
-  public List<Team> getTeams() {
-    return teamRepository.findAll();
-  }
-
   @GetMapping("/{teamId}")
   public Team getTeam(@PathVariable Long teamId) {
     return teamRepository.findById(teamId).orElseThrow(() -> new TeamNotFoundException(teamId));
   }
 
   @PostMapping
-  public List<Team> saveTeams(@RequestBody List<Team> teams) {
-    return List.of(teamRepository.save(teams.get(0)));
+  public Team saveTeam(@RequestBody Team team) {
+    return teamRepository.save(team);
   }
 }

@@ -17,7 +17,8 @@ public class TeamEntity {
     this.name = "";
   }
 
-  public TeamEntity(String name) {
+  public TeamEntity(@Nullable Long id, String name) {
+    this.id = id;
     this.name = name;
   }
 
@@ -26,7 +27,7 @@ public class TeamEntity {
     return id;
   }
 
-  public void setId(@Nullable Long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

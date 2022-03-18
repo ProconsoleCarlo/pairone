@@ -19,6 +19,12 @@ public class DeveloperEntity {
     this.nickName = "";
   }
 
+  public DeveloperEntity(@Nullable Long id, String nickName, @Nullable Long teamId) {
+    this.id = id;
+    this.nickName = nickName;
+    this.teamId = teamId;
+  }
+
   public DeveloperEntity(@Nullable Long id, String nickName) {
     this.id = id;
     this.nickName = nickName;

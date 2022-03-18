@@ -30,6 +30,11 @@ public class DeveloperEntity {
     this.nickName = nickName;
   }
 
+  public DeveloperEntity(String nickName, @Nullable Long teamId) {
+    this.nickName = nickName;
+    this.teamId = teamId;
+  }
+
   public DeveloperEntity(String nickName) {
     this.nickName = nickName;
   }

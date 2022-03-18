@@ -26,6 +26,14 @@ class DeveloperAdapterTest {
   }
 
   @Test
+  void fromDomainWithTeamId() {
+    var domain = List.of(new Developer("Dev1"));
+    var entities = List.of(new DeveloperEntity("Dev1", 123L));
+
+    assertEquals(entities, adapter.fromDomain(domain, 123L));
+  }
+
+  @Test
   void toDomain() {
     assertEquals(DOMAIN, adapter.toDomain(ENTITIES));
   }

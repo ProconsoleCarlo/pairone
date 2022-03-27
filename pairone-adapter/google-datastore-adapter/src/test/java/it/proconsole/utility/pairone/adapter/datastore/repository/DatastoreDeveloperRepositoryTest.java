@@ -3,6 +3,7 @@ package it.proconsole.utility.pairone.adapter.datastore.repository;
 import it.proconsole.utility.pairone.adapter.datastore.model.DeveloperEntity;
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.DeveloperAdapter;
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.DeveloperEntityRepository;
+import it.proconsole.utility.pairone.adapter.datastore.repository.crud.TeamEntityRepository;
 import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,15 @@ class DatastoreDeveloperRepositoryTest {
   @Mock
   private DeveloperEntityRepository developerEntityRepository;
   @Mock
+  private TeamEntityRepository teamEntityRepository;
+  @Mock
   private DeveloperAdapter developerAdapter;
 
   private DeveloperRepository repository;
 
   @BeforeEach
   void setUp() {
-    repository = new DatastoreDeveloperRepository(developerEntityRepository, developerAdapter);
+    repository = new DatastoreDeveloperRepository(developerEntityRepository, teamEntityRepository, developerAdapter);
   }
 
   @Test

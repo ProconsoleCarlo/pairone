@@ -10,11 +10,20 @@ public class Developer {
   @Nullable
   private final Long id;
   private final String nickName;
+  @Nullable
+  private final Long teamId;
 
   @JsonCreator
+  public Developer(@Nullable Long id, String nickName, @Nullable Long teamId) {
+    this.id = id;
+    this.nickName = nickName;
+    this.teamId = teamId;
+  }
+
   public Developer(@Nullable Long id, String nickName) {
     this.id = id;
     this.nickName = nickName;
+    this.teamId = null;
   }
 
   public Developer(String nickName) {
@@ -32,6 +41,12 @@ public class Developer {
     return nickName;
   }
 
+  @JsonGetter
+  @Nullable
+  public Long teamId() {
+    return teamId;
+  }
+
   public Builder copy() {
     return new Builder(this);
   }
@@ -41,12 +56,12 @@ public class Developer {
     if (this == o) return true;
     if (!(o instanceof Developer)) return false;
     Developer developer = (Developer) o;
-    return Objects.equals(id, developer.id) && nickName.equals(developer.nickName);
+    return Objects.equals(id, developer.id) && nickName.equals(developer.nickName) && Objects.equals(teamId, developer.teamId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nickName);
+    return Objects.hash(id, nickName, teamId);
   }
 
   public static class Builder {

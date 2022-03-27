@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import org.springframework.lang.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,8 +21,8 @@ public class Team {
     this.developers = developers;
   }
 
-  public Team(String name, List<Developer> developers) {
-    this(null, name, developers);
+  public Team(Long id, String name) {
+    this(id, name, Collections.emptyList());
   }
 
   @JsonGetter

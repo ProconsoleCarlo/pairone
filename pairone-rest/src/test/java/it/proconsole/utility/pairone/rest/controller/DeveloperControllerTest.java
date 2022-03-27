@@ -5,6 +5,8 @@ import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,7 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -26,7 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = DeveloperController.class)
 class DeveloperControllerTest {
   private static final String DEVELOPERS_SAVED_JSON = "/developer/developersSaved.json";
-  private static final String DEVELOPERS_TO_SAVE_JSON = "/developer/developersToSave.json";
+  private static final String DEVELOPER_TO_CREATE_JSON = "/developer/developerToCreate.json";
+  private static final String DEVELOPER_TO_UPDATE_JSON = "/developer/developerToUpdate.json";
+  private static final String SAVED_DEVELOPER_JSON = "/developer/savedDeveloper.json";
 
   @MockBean
   private DeveloperRepository developerRepository;
@@ -47,19 +51,20 @@ class DeveloperControllerTest {
     verifyNoMoreInteractions(developerRepository);
   }
 
-  @Test
-  void saveDevelopers() throws Exception {
-    when(developerRepository.saveAll(anyList()))
-            .thenReturn(Fixtures.readListFromClasspath(DEVELOPERS_SAVED_JSON, Developer.class));
+  @ParameterizedTest
+  @ValueSource(strings = {DEVELOPER_TO_CREATE_JSON, DEVELOPER_TO_UPDATE_JSON})
+  void saveDevelopers(String developerToSave) throws Exception {
+    when(developerRepository.save(any()))
+            .thenReturn(Fixtures.readFromClasspath(SAVED_DEVELOPER_JSON, Developer.class));
 
     mvc.perform(post("/developer")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(Fixtures.readFromClasspath(DEVELOPERS_TO_SAVE_JSON)))
+                    .content(Fixtures.readFromClasspath(developerToSave)))
             .andExpect(status().isOk())
-            .andExpect(content().json(Fixtures.readFromClasspath(DEVELOPERS_SAVED_JSON)));
+            .andExpect(content().json(Fixtures.readFromClasspath(SAVED_DEVELOPER_JSON)));
 
     verify(developerRepository, times(1))
-            .saveAll(Fixtures.readListFromClasspath(DEVELOPERS_TO_SAVE_JSON, Developer.class));
+            .save(Fixtures.readFromClasspath(developerToSave, Developer.class));
     verifyNoMoreInteractions(developerRepository);
   }
 }

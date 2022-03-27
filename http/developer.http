@@ -2,18 +2,12 @@
 GET {{baseUrl}}/developer
 Accept: application/json
 
-### saveDevelopers
+### saveDeveloper
 POST {{baseUrl}}/developer
 Accept: application/json
 Content-Type: application/json
 
-[
-  {
-    "id": 1,
-    "nickName": "Carlo"
-  },
-  {
-    "id": null,
-    "nickName": "Andrea"
-  }
-]
+{
+  "id": 1,
+  "nickName": "Carlo"
+}

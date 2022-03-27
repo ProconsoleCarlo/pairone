@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +27,7 @@ public class TeamController {
   }
 
   @PostMapping
-  public Team updateTeam(@RequestBody Team team) {
-    return teamRepository.save(team);
-  }
-
-  @PutMapping
-  public Team createTeam(@RequestBody Team team) {
+  public Team saveTeam(@RequestBody Team team) {
     return teamRepository.save(team);
   }
 

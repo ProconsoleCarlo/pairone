@@ -1,0 +1,28 @@
+[
+  {
+    "id": "9|1|2",
+    "members": [
+      {
+        "id": 1,
+        "nickName": "Dev1"
+      },
+      {
+        "id": 2,
+        "nickName": "Dev2"
+      }
+    ]
+  },
+  {
+    "id": "9|2|1",
+    "members": [
+      {
+        "id": 1,
+        "nickName": "Dev1"
+      },
+      {
+        "id": 2,
+        "nickName": "Dev2"
+      }
+    ]
+  }
+]

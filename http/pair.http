@@ -1,0 +1,37 @@
+### getPairs
+GET {{baseUrl}}/team/{{teamId}}/pair
+Accept: application/json
+
+### savePairs
+POST {{baseUrl}}/team/{{teamId}}/pair
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": "{{teamId}}|1|2",
+    "members": [
+      {
+        "id": 1,
+        "nickName": "Carlo"
+      },
+      {
+        "id": 2,
+        "nickName": "Andrea"
+      }
+    ]
+  },
+  {
+    "id": "{{teamId}}|2|1",
+    "members": [
+      {
+        "id": 2,
+        "nickName": "Andrea"
+      },
+      {
+        "id": 1,
+        "nickName": "Carlo"
+      }
+    ]
+  }
+]

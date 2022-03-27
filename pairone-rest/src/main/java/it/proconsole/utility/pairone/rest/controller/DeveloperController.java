@@ -4,7 +4,6 @@ import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +25,7 @@ public class DeveloperController {
   }
 
   @PostMapping
-  public Developer updateDeveloper(@RequestBody Developer developer) {
-    return developerRepository.save(developer);
-  }
-
-  @PutMapping
-  public Developer createDeveloper(@RequestBody Developer developer) {
+  public Developer saveDeveloper(@RequestBody Developer developer) {
     return developerRepository.save(developer);
   }
 }

@@ -130,30 +130,4 @@ class DatastoreDeveloperRepositoryTest {
       verifyNoInteractions(developerAdapter, developerEntityRepository);
     }
   }
-
-
-  @Test
-  void saveAll() {
-    var domainToSave = List.of(
-            new Developer("Dev1"),
-            new Developer(9L, "Dev2")
-    );
-    var entitiesToSave = List.of(
-            new DeveloperEntity("Dev1"),
-            new DeveloperEntity(9L, "Dev2")
-    );
-    var entitiesSaved = List.of(
-            new DeveloperEntity(1L, "Dev1"),
-            new DeveloperEntity(9L, "Dev2")
-    );
-    var domainSaved = List.of(
-            new Developer(1L, "Dev1"),
-            new Developer(9L, "Dev2")
-    );
-    when(developerAdapter.fromDomain(domainToSave)).thenReturn(entitiesToSave);
-    when(developerEntityRepository.saveAll(entitiesToSave)).thenReturn(entitiesSaved);
-    when(developerAdapter.toDomain(entitiesSaved)).thenReturn(domainSaved);
-
-    assertEquals(domainSaved, repository.saveAll(domainToSave));
-  }
 }

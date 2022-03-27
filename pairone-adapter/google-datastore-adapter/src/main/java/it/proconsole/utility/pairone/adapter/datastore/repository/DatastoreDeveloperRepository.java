@@ -40,13 +40,6 @@ public class DatastoreDeveloperRepository implements DeveloperRepository {
     return developerAdapter.toDomain(savedEntity);
   }
 
-  @Override
-  public List<Developer> saveAll(List<Developer> developers) {
-    var entities = developerAdapter.fromDomain(developers);
-    var savedEntities = developerEntityRepository.saveAll(entities);
-    return developerAdapter.toDomain(savedEntities);
-  }
-
   private boolean notExistsTeamWith(@Nullable Long teamId) {
     return teamId != null && teamEntityRepository.findById(teamId).isEmpty();
   }

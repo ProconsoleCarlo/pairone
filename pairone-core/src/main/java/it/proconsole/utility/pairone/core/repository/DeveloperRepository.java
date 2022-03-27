@@ -8,6 +8,4 @@ public interface DeveloperRepository {
   List<Developer> findAll();
 
   Developer save(Developer developer);
-
-  List<Developer> saveAll(List<Developer> developers);
 }

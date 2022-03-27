@@ -26,6 +26,10 @@ public class Developer {
     this.teamId = null;
   }
 
+  public Developer(String nickName, @Nullable Long teamId) {
+    this(null, nickName, teamId);
+  }
+
   public Developer(String nickName) {
     this(null, nickName);
   }
@@ -62,6 +66,15 @@ public class Developer {
   @Override
   public int hashCode() {
     return Objects.hash(id, nickName, teamId);
+  }
+
+  @Override
+  public String toString() {
+    return "Developer{" +
+            "id=" + id +
+            ", nickName='" + nickName + '\'' +
+            ", teamId=" + teamId +
+            '}';
   }
 
   public static class Builder {

@@ -15,19 +15,19 @@ public class DeveloperAdapter {
     return developers.stream().map(this::fromDomain).collect(Collectors.toList());
   }
 
-  public List<Developer> toDomain(List<DeveloperEntity> developers) {
-    return developers.stream().map(this::toDomain).collect(Collectors.toList());
-  }
-
-  private DeveloperEntity fromDomain(Developer developer, Long teamId) {
-    return new DeveloperEntity(developer.id(), developer.nickName(), teamId);
-  }
-
   public DeveloperEntity fromDomain(Developer developer) {
     return new DeveloperEntity(developer.id(), developer.nickName(), developer.teamId());
   }
 
+  public List<Developer> toDomain(List<DeveloperEntity> developers) {
+    return developers.stream().map(this::toDomain).collect(Collectors.toList());
+  }
+
   public Developer toDomain(DeveloperEntity developer) {
     return new Developer(developer.getId(), developer.getNickName());
+  }
+
+  private DeveloperEntity fromDomain(Developer developer, Long teamId) {
+    return new DeveloperEntity(developer.id(), developer.nickName(), teamId);
   }
 }

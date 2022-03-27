@@ -24,7 +24,7 @@ public class DeveloperAdapter {
   }
 
   public Developer toDomain(DeveloperEntity developer) {
-    return new Developer(developer.getId(), developer.getNickName());
+    return new Developer(developer.getId(), developer.getNickName(), developer.getTeamId());
   }
 
   private DeveloperEntity fromDomain(Developer developer, Long teamId) {

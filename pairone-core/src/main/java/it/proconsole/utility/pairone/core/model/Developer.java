@@ -21,9 +21,7 @@ public class Developer {
   }
 
   public Developer(@Nullable Long id, String nickName) {
-    this.id = id;
-    this.nickName = nickName;
-    this.teamId = null;
+    this(id, nickName, null);
   }
 
   public Developer(String nickName, @Nullable Long teamId) {

@@ -1,14 +1,17 @@
 [
   {
     "id": 1,
-    "nickName": "Carlo"
+    "nickName": "Carlo",
+    "teamId": 987
   },
   {
     "id": 2,
-    "nickName": "Andrea"
+    "nickName": "Andrea",
+    "teamId": 986
   },
   {
     "id": 3,
-    "nickName": "Matteo"
+    "nickName": "Matteo",
+    "teamId": null
   }
 ]

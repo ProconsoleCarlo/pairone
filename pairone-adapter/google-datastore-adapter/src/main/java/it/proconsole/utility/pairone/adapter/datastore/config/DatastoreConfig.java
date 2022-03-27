@@ -22,9 +22,14 @@ public class DatastoreConfig {
   @Bean
   public DeveloperRepository datastoreDeveloperRepository(
           DeveloperEntityRepository developerEntityRepository,
+          TeamEntityRepository teamEntityRepository,
           DeveloperAdapter developerAdapter
   ) {
-    return new DatastoreDeveloperRepository(developerEntityRepository, developerAdapter);
+    return new DatastoreDeveloperRepository(
+            developerEntityRepository,
+            teamEntityRepository,
+            developerAdapter
+    );
   }
 
   @Bean

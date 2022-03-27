@@ -13,10 +13,6 @@ public class TeamEntity {
   private Long id;
   private String name;
 
-  public TeamEntity() {
-    this.name = "";
-  }
-
   public TeamEntity(@Nullable Long id, String name) {
     this.id = id;
     this.name = name;

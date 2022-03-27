@@ -25,7 +25,7 @@ public class DeveloperController {
   }
 
   @PostMapping
-  public List<Developer> saveDevelopers(@RequestBody List<Developer> developers) {
-    return developerRepository.saveAll(developers);
+  public Developer saveDeveloper(@RequestBody Developer developer) {
+    return developerRepository.save(developer);
   }
 }

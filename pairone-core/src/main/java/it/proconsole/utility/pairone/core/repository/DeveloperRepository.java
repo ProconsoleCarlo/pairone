@@ -7,5 +7,5 @@ import java.util.List;
 public interface DeveloperRepository {
   List<Developer> findAll();
 
-  List<Developer> saveAll(List<Developer> developers);
+  Developer save(Developer developer);
 }

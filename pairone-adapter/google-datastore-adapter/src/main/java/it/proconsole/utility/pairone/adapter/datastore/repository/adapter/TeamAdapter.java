@@ -4,7 +4,6 @@ import it.proconsole.utility.pairone.adapter.datastore.model.DeveloperEntity;
 import it.proconsole.utility.pairone.adapter.datastore.model.TeamEntity;
 import it.proconsole.utility.pairone.core.model.Team;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TeamAdapter {
@@ -20,9 +19,5 @@ public class TeamAdapter {
 
   public Team toDomain(TeamEntity team, List<DeveloperEntity> developerEntities) {
     return new Team(team.getId(), team.getName(), developerAdapter.toDomain(developerEntities));
-  }
-
-  public Team toDomain(TeamEntity team) {
-    return new Team(team.getId(), team.getName(), Collections.emptyList());
   }
 }

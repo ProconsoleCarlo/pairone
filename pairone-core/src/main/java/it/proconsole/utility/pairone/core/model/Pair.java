@@ -16,7 +16,6 @@ public class Pair {
   public Pair(String id, List<Developer> members) {
     this.id = id;
     this.members = new ArrayList<>(members);
-    this.members.sort((dev1, dev2) -> 0); //TODO
   }
 
   @JsonGetter
@@ -29,12 +28,10 @@ public class Pair {
     return members;
   }
 
-  //TODO
   public Long firstId() {
     return Objects.requireNonNull(members.get(0).id());
   }
 
-  //TODO
   public Optional<Long> secondId() {
     return members.size() > 1
             ? Optional.ofNullable(members.get(1).id())

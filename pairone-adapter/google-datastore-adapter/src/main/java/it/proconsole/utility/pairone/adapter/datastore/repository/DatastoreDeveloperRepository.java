@@ -31,6 +31,11 @@ public class DatastoreDeveloperRepository implements DeveloperRepository {
   }
 
   @Override
+  public List<Developer> findByTeamId(Long teamId) {
+    return developerAdapter.toDomain(developerEntityRepository.findByTeamId(teamId));
+  }
+
+  @Override
   public Developer save(Developer developer) {
     if (notExistsTeamWith(developer.teamId())) {
       throw EntityNotFoundException.forTeam(developer.teamId());

@@ -50,4 +50,12 @@ public class Pair {
   public int hashCode() {
     return Objects.hash(id, members);
   }
+
+  @Override
+  public String toString() {
+    return "Pair{" +
+            "id='" + id + '\'' +
+            ", members=" + members +
+            '}';
+  }
 }

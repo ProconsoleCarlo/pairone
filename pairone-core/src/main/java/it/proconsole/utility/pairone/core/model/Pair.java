@@ -10,12 +10,18 @@ import java.util.Optional;
 
 public class Pair {
   private final String id;
+  //TODO rename
   private final List<Developer> members;
 
   @JsonCreator
   public Pair(String id, List<Developer> members) {
     this.id = id;
     this.members = new ArrayList<>(members);
+  }
+
+  public Pair(Long teamId, List<Developer> members) {
+    this.members = members;
+    this.id = teamId + "|" + firstId() + "|" + secondId().orElse(null);
   }
 
   @JsonGetter

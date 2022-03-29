@@ -25,9 +25,9 @@ class CircleRoundRobinSchedulerTest {
     var current = scheduler.scheduleFor(players);
 
     var expected = List.of(
-            new Round<>(1L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(2L), new Player(4L)))),
-            new Round<>(2L, List.of(new Match<>(1L, new Player(1L), new Player(4L)), new Match<>(2L, new Player(3L), new Player(2L)))),
-            new Round<>(3L, List.of(new Match<>(1L, new Player(1L), new Player(2L)), new Match<>(2L, new Player(4L), new Player(3L))))
+            new Round<>(1L, List.of(new Match<>(1L, new Player(1L), new Player(4L)), new Match<>(2L, new Player(2L), new Player(3L)))),
+            new Round<>(2L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(4L), new Player(2L)))),
+            new Round<>(3L, List.of(new Match<>(1L, new Player(1L), new Player(2L)), new Match<>(2L, new Player(3L), new Player(4L))))
     );
 
     assertTrue(current.containsAll(expected));
@@ -40,8 +40,8 @@ class CircleRoundRobinSchedulerTest {
     var current = scheduler.scheduleFor(players);
 
     var expected = List.of(
-            new Round<>(1L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(2L)))),
-            new Round<>(2L, List.of(new Match<>(1L, new Player(1L)), new Match<>(2L, new Player(3L), new Player(2L)))),
+            new Round<>(1L, List.of(new Match<>(1L, new Player(1L)), new Match<>(2L, new Player(2L), new Player(3L)))),
+            new Round<>(2L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(2L)))),
             new Round<>(3L, List.of(new Match<>(1L, new Player(1L), new Player(2L)), new Match<>(2L, new Player(3L))))
     );
 

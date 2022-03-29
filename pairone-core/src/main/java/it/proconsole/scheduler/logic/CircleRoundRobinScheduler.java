@@ -4,54 +4,38 @@ import it.proconsole.scheduler.model.Match;
 import it.proconsole.scheduler.model.Round;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class CircleRoundRobinScheduler<P> implements Scheduler<P> {
   @Override
-  public List<Round<P>> scheduleFor(List<P> players) {
-    var rounds = new ArrayList<Round<P>>();
-    var a = new ArrayList<>(players);
-    if (a.size() % 2 != 0) {
-      a.add(null);
+  public List<Round<P>> scheduleFor(List<P> a) {
+    var players = new LinkedList<>(a);
+    if (players.size() % 2 != 0) {
+      players.add(null);
     }
-
-    var n = a.size();
+    var n = players.size();
     var numberOfRounds = n - 1;
     var gamesPerRound = n / 2;
+    var rounds = new LinkedList<Round<P>>();
 
-    var columnA = new LinkedList<>(a.subList(0, gamesPerRound));
-    var columnB = new LinkedList<>(a.subList(gamesPerRound, a.size()));
-    var fixed = a.get(0);
-
-    for (int round = 0; round < numberOfRounds; round++) {
+    IntStream.range(0, numberOfRounds).forEach(i -> {
       var matches = new ArrayList<Match<P>>();
-      for (int i = 0; i < gamesPerRound; i++) {
-        if (columnA.get(i) == null) {
-          matches.add(new Match<>((long) i + 1, columnB.get(i)));
-        } else if (columnB.get(i) == null) {
-          matches.add(new Match<>((long) i + 1, columnA.get(i)));
+      IntStream.range(0, gamesPerRound).forEach(j -> {
+        if (players.get(j) == null) {
+          matches.add(new Match<>((long) j + 1, players.get(n - j - 1)));
+        } else if (players.get(n - j - 1) == null) {
+          matches.add(new Match<>((long) j + 1, players.get(j)));
         } else {
-          matches.add(new Match<>((long) i + 1, columnA.get(i), columnB.get(i)));
+          matches.add(new Match<>((long) j + 1, players.get(j), players.get(n - j - 1)));
         }
-      }
-      rounds.add(new Round<>((long) (round + 1), matches));
-
-      var newColumnA = new LinkedList<P>();
-      newColumnA.add(fixed);
-      newColumnA.add(columnB.get(0));
-      columnB.remove(0);
-      newColumnA.addAll(columnA.subList(1, columnA.size()));
-      columnA = newColumnA;
-      var newColumnB = new LinkedList<>(columnB);
-      newColumnB.add(columnA.get(columnA.size() - 1));
-      columnA.remove(columnA.size() - 1);
-      columnB = newColumnB;
-    }
+      });
+      rounds.add(new Round<>((long) (i + 1), matches));
+      Collections.rotate(players.subList(1, players.size()), 1);  //last element inserted at index 1
+    });
     return rounds;
   }
 
-  private boolean isOdd(int n) {
-    return n % 2 != 0;
-  }
 }

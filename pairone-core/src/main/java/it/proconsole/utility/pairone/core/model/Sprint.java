@@ -1,15 +1,14 @@
 package it.proconsole.utility.pairone.core.model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Sprint {
   private final Long round;
-  private final Long game;
-  private final Pair pairs;
+  private final List<Pair> pairs;
 
-  public Sprint(Long round, Long game, Pair pairs) {
+  public Sprint(Long round, List<Pair> pairs) {
     this.round = round;
-    this.game = game;
     this.pairs = pairs;
   }
 
@@ -17,11 +16,7 @@ public class Sprint {
     return round;
   }
 
-  public Long getGame() {
-    return game;
-  }
-
-  public Pair getPairs() {
+  public List<Pair> getPairs() {
     return pairs;
   }
 
@@ -30,20 +25,11 @@ public class Sprint {
     if (this == o) return true;
     if (!(o instanceof Sprint)) return false;
     Sprint sprint = (Sprint) o;
-    return round.equals(sprint.round) && game.equals(sprint.game) && pairs.equals(sprint.pairs);
+    return round.equals(sprint.round) && pairs.equals(sprint.pairs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(round, game, pairs);
-  }
-
-  @Override
-  public String toString() {
-    return "Sprint{" +
-            "round=" + round +
-            ", game=" + game +
-            ", pairs=" + pairs +
-            '}';
+    return Objects.hash(round, pairs);
   }
 }

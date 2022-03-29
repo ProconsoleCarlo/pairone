@@ -38,12 +38,9 @@ class RoundRobinPairsGeneratorTest {
     var current = generator.generateFor(TEAM_ID);
 
     var expected = List.of(
-            new Sprint(1L, 1L, new Pair(TEAM_ID, List.of(dev(1L)))),
-            new Sprint(1L, 2L, new Pair(TEAM_ID, List.of(dev(2L), dev(3L)))),
-            new Sprint(2L, 1L, new Pair(TEAM_ID, List.of(dev(1L), dev(3L)))),
-            new Sprint(2L, 2L, new Pair(TEAM_ID, List.of(dev(2L)))),
-            new Sprint(3L, 1L, new Pair(TEAM_ID, List.of(dev(1L), dev(2L)))),
-            new Sprint(3L, 2L, new Pair(TEAM_ID, List.of(dev(3L))))
+            new Sprint(1L, List.of(new Pair(TEAM_ID, List.of(dev(1L))), new Pair(TEAM_ID, List.of(dev(2L), dev(3L))))),
+            new Sprint(2L, List.of(new Pair(TEAM_ID, List.of(dev(1L), dev(3L))), new Pair(TEAM_ID, List.of(dev(2L))))),
+            new Sprint(3L, List.of(new Pair(TEAM_ID, List.of(dev(1L), dev(2L))), new Pair(TEAM_ID, List.of(dev(3L)))))
     );
 
     assertEquals(expected, current);

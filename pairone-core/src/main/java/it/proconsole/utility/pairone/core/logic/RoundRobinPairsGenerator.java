@@ -23,17 +23,14 @@ public class RoundRobinPairsGenerator implements PairsGenerator {
     var developers = developerRepository.findByTeamId(teamId);
     var rounds = scheduler.scheduleFor(developers);
     return rounds.stream()
-            .flatMap(
-                    round -> round.matches().stream()
-                            .map(match ->
-                                    new Sprint(
-                                            round.id(),
-                                            match.id(),
-                                            match.secondPlayer()
-                                                    .map(it -> new Pair(teamId, List.of(match.firstPlayer(), it)))
-                                                    .orElseGet(() -> new Pair(teamId, List.of(match.firstPlayer())))
-                                    )
-                            )
+            .map(round -> new Sprint(
+                            round.id(),
+                            round.matches().stream()
+                                    .map(match -> match.secondPlayer()
+                                            .map(it -> new Pair(teamId, List.of(match.firstPlayer(), it)))
+                                            .orElseGet(() -> new Pair(teamId, List.of(match.firstPlayer())))
+                                    ).collect(Collectors.toList())
+                    )
             ).collect(Collectors.toList());
   }
 }

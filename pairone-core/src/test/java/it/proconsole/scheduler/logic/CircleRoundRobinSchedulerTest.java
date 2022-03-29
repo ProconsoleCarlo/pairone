@@ -2,50 +2,49 @@ package it.proconsole.scheduler.logic;
 
 import it.proconsole.scheduler.model.Match;
 import it.proconsole.scheduler.model.Round;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CircleRoundRobinSchedulerTest {
-  private Scheduler<Player> scheduler;
+  private static final Player P1 = new Player(1L);
+  private static final Player P2 = new Player(2L);
+  private static final Player P3 = new Player(3L);
+  private static final Player P4 = new Player(4L);
 
-  @BeforeEach
-  void setUp() {
-    scheduler = new CircleRoundRobinScheduler<>();
-  }
+  private final Scheduler<Player> scheduler = new CircleRoundRobinScheduler<>();
 
   @Test
   void scheduleForEvenNumber() {
-    var players = List.of(new Player(1L), new Player(2L), new Player(3L), new Player(4L));
+    var players = List.of(P1, P2, P3, P4);
 
     var current = scheduler.scheduleFor(players);
 
     var expected = List.of(
-            new Round<>(1L, List.of(new Match<>(1L, new Player(1L), new Player(4L)), new Match<>(2L, new Player(2L), new Player(3L)))),
-            new Round<>(2L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(4L), new Player(2L)))),
-            new Round<>(3L, List.of(new Match<>(1L, new Player(1L), new Player(2L)), new Match<>(2L, new Player(3L), new Player(4L))))
+            new Round<>(1L, List.of(new Match<>(1L, P1, P4), new Match<>(2L, P2, P3))),
+            new Round<>(2L, List.of(new Match<>(1L, P1, P3), new Match<>(2L, P4, P2))),
+            new Round<>(3L, List.of(new Match<>(1L, P1, P2), new Match<>(2L, P3, P4)))
     );
 
-    assertTrue(current.containsAll(expected));
+    assertEquals(expected, current);
   }
 
   @Test
   void scheduleForOddNumber() {
-    var players = List.of(new Player(1L), new Player(2L), new Player(3L));
+    var players = List.of(P1, P2, P3);
 
     var current = scheduler.scheduleFor(players);
 
     var expected = List.of(
-            new Round<>(1L, List.of(new Match<>(1L, new Player(1L)), new Match<>(2L, new Player(2L), new Player(3L)))),
-            new Round<>(2L, List.of(new Match<>(1L, new Player(1L), new Player(3L)), new Match<>(2L, new Player(2L)))),
-            new Round<>(3L, List.of(new Match<>(1L, new Player(1L), new Player(2L)), new Match<>(2L, new Player(3L))))
+            new Round<>(1L, List.of(new Match<>(1L, P1), new Match<>(2L, P2, P3))),
+            new Round<>(2L, List.of(new Match<>(1L, P1, P3), new Match<>(2L, P2))),
+            new Round<>(3L, List.of(new Match<>(1L, P1, P2), new Match<>(2L, P3)))
     );
 
-    assertTrue(current.containsAll(expected));
+    assertEquals(expected, current);
   }
 
   static class Player {

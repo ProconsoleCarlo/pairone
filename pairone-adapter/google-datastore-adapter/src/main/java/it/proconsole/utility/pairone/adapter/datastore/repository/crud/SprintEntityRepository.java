@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface SprintEntityRepository extends DatastoreRepository<SprintEntity, String> {
   List<SprintEntity> findByTeamId(Long teamId);
+
+  @Override
+  <S extends SprintEntity> List<S> saveAll(Iterable<S> entities);
 }

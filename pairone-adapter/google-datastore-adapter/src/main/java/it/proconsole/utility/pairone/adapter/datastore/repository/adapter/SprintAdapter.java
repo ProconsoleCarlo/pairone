@@ -14,11 +14,11 @@ public class SprintAdapter {
             .collect(Collectors.toList());
   }
 
-  private SprintEntity fromDomain(Sprint sprint, Long teamId) {
+  public SprintEntity fromDomain(Sprint sprint, Long teamId) {
     return new SprintEntity(sprint.id(), teamId, sprint.round());
   }
 
   public Sprint toDomain(SprintEntity sprint, List<Pair> pairs) {
-    return new Sprint(sprint.getId(), sprint.getTeamId(), sprint.getRound(), pairs);
+    return new Sprint(sprint.getId(), sprint.getRound(), pairs);
   }
 }

@@ -54,26 +54,32 @@ public class DatastoreConfig {
   public PairRepository datastorePairRepository(
           PairEntityRepository pairEntityRepository,
           DeveloperEntityRepository developerEntityRepository,
-          DeveloperAdapter developerAdapter
-
+          PairAdapter pairAdapter
   ) {
     return new DatastorePairRepository(
             pairEntityRepository,
             developerEntityRepository,
-            new PairAdapter(developerAdapter)
+            pairAdapter
     );
   }
 
   @Bean
   public SprintRepository datastoreSprintRepository(
           SprintEntityRepository sprintEntityRepository,
-          PairRepository datastorePairRepository
+          PairRepository datastorePairRepository,
+          PairAdapter pairAdapter
   ) {
     return new DatastoreSprintRepository(
             sprintEntityRepository,
             datastorePairRepository,
-            new SprintAdapter()
+            new SprintAdapter(),
+            pairAdapter
     );
+  }
+
+  @Bean
+  public PairAdapter pairAdapter(DeveloperAdapter developerAdapter) {
+    return new PairAdapter(developerAdapter);
   }
 
   @Bean

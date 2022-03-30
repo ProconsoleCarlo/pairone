@@ -8,28 +8,18 @@ import java.util.Objects;
 public class Sprint {
   @Nullable
   private final Long id;
-  private final Long teamId;
   private final Long round;
   private final List<Pair> pairs;
 
-  public Sprint(@Nullable Long id, Long teamId, Long round, List<Pair> pairs) {
+  public Sprint(@Nullable Long id, Long round, List<Pair> pairs) {
     this.id = id;
-    this.teamId = teamId;
     this.round = round;
     this.pairs = pairs;
-  }
-
-  public Sprint(Long teamId, Long round, List<Pair> pairs) {
-    this(null, teamId, round, pairs);
   }
 
   @Nullable
   public Long id() {
     return id;
-  }
-
-  public Long teamId() {
-    return teamId;
   }
 
   public Long round() {
@@ -45,11 +35,11 @@ public class Sprint {
     if (this == o) return true;
     if (!(o instanceof Sprint)) return false;
     Sprint sprint = (Sprint) o;
-    return Objects.equals(id, sprint.id) && teamId.equals(sprint.teamId) && round.equals(sprint.round) && pairs.equals(sprint.pairs);
+    return Objects.equals(id, sprint.id) && round.equals(sprint.round) && pairs.equals(sprint.pairs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, teamId, round, pairs);
+    return Objects.hash(id, round, pairs);
   }
 }

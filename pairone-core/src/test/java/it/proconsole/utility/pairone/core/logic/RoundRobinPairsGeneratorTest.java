@@ -1,6 +1,8 @@
 package it.proconsole.utility.pairone.core.logic;
 
-import it.proconsole.scheduler.logic.CircleRoundRobinScheduler;
+import it.proconsole.scheduler.logic.Scheduler;
+import it.proconsole.scheduler.model.Match;
+import it.proconsole.scheduler.model.Round;
 import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.model.Pair;
 import it.proconsole.utility.pairone.core.model.Sprint;
@@ -22,18 +24,26 @@ class RoundRobinPairsGeneratorTest {
 
   @Mock
   private DeveloperRepository developerRepository;
+  @Mock
+  private Scheduler<Developer> scheduler;
 
   private PairsGenerator generator;
 
   @BeforeEach
   void setUp() {
-    generator = new RoundRobinPairsGenerator(developerRepository, new CircleRoundRobinScheduler<>());
+    generator = new RoundRobinPairsGenerator(developerRepository, scheduler);
   }
 
   @Test
-  void generateForOddNumber() {
-    when(developerRepository.findByTeamId(TEAM_ID))
-            .thenReturn(List.of(dev(1L), dev(2L), dev(3L)));
+  void generate() {
+    var developers = List.of(dev(1L), dev(2L), dev(3L));
+    var rounds = List.of(
+            new Round<>(1L, List.of(new Match<>(1L, dev(1L)), new Match<>(2L, dev(2L), dev(3L)))),
+            new Round<>(2L, List.of(new Match<>(1L, dev(1L), dev(3L)), new Match<>(2L, dev(2L)))),
+            new Round<>(3L, List.of(new Match<>(1L, dev(1L), dev(2L)), new Match<>(2L, dev(3L))))
+    );
+    when(developerRepository.findByTeamId(TEAM_ID)).thenReturn(developers);
+    when(scheduler.scheduleFor(developers)).thenReturn(rounds);
 
     var current = generator.generateFor(TEAM_ID);
 

@@ -1,6 +1,7 @@
 package it.proconsole.utility.pairone.core.logic;
 
 import it.proconsole.scheduler.logic.Scheduler;
+import it.proconsole.scheduler.model.Round;
 import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.model.Pair;
 import it.proconsole.utility.pairone.core.model.Sprint;
@@ -23,14 +24,15 @@ public class RoundRobinPairsGenerator implements PairsGenerator {
     var developers = developerRepository.findByTeamId(teamId);
     var rounds = scheduler.scheduleFor(developers);
     return rounds.stream()
-            .map(round -> new Sprint(
-                            round.id(),
-                            round.matches().stream()
-                                    .map(match -> match.secondPlayer()
-                                            .map(it -> new Pair(teamId, List.of(match.firstPlayer(), it)))
-                                            .orElseGet(() -> new Pair(teamId, List.of(match.firstPlayer())))
-                                    ).collect(Collectors.toList())
-                    )
+            .map(round -> new Sprint(round.id(), getPairsFor(teamId, round)))
+            .collect(Collectors.toList());
+  }
+
+  private List<Pair> getPairsFor(Long teamId, Round<Developer> round) {
+    return round.matches().stream()
+            .map(match -> match.secondPlayer()
+                    .map(it -> new Pair(teamId, List.of(match.firstPlayer(), it)))
+                    .orElseGet(() -> new Pair(teamId, List.of(match.firstPlayer())))
             ).collect(Collectors.toList());
   }
 }

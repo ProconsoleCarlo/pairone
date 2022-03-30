@@ -8,16 +8,20 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "id": null,
+  "id": {{teamId}},
   "name": "An awesome team name",
   "developers": [
     {
-      "id": null,
-      "nickName": "Carlo"
+      "id": 5709113312935936,
+      "nickName": "Dev1"
     },
     {
-      "id": 2,
-      "nickName": "Andrea"
+      "id": 5743670015819776,
+      "nickName": "Dev2"
+    },
+    {
+      "id": 5671636300726272,
+      "nickName": "Dev3"
     }
   ]
 }

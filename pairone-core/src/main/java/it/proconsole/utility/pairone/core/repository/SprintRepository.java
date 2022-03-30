@@ -8,4 +8,6 @@ public interface SprintRepository {
   List<Sprint> findByTeamId(Long teamId);
 
   List<Sprint> saveAll(Long teamId, List<Sprint> sprints);
+
+  Sprint save(Long teamId, Sprint sprint);
 }

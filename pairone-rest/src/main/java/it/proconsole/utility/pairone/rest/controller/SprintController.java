@@ -35,7 +35,7 @@ public class SprintController {
     return sprintRepository.saveAll(teamId, sprints);
   }
 
-  @PostMapping("/team/{teamId}/pair")
+  @PostMapping("/team/{teamId}/sprint")
   public List<Sprint> saveSprints(@PathVariable Long teamId, @RequestBody List<Sprint> sprints) {
     return sprintRepository.saveAll(teamId, sprints);
   }

@@ -1,5 +1,7 @@
 package it.proconsole.utility.pairone.core.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
@@ -11,21 +13,29 @@ public class Sprint {
   private final Long round;
   private final List<Pair> pairs;
 
+  @JsonCreator
   public Sprint(@Nullable Long id, Long round, List<Pair> pairs) {
     this.id = id;
     this.round = round;
     this.pairs = pairs;
   }
 
+  public Sprint(Long round, List<Pair> pairs) {
+    this(null, round, pairs);
+  }
+
+  @JsonGetter
   @Nullable
   public Long id() {
     return id;
   }
 
+  @JsonGetter
   public Long round() {
     return round;
   }
 
+  @JsonGetter
   public List<Pair> pairs() {
     return pairs;
   }

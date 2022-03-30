@@ -42,7 +42,8 @@ public class DatastoreSprintRepository implements SprintRepository {
             .collect(Collectors.toList());
   }
 
-  private Sprint save(Long teamId, Sprint sprint) {
+  @Override
+  public Sprint save(Long teamId, Sprint sprint) {
     var sprintEntity = sprintAdapter.fromDomain(sprint, teamId);
     var savedEntity = entityRepository.save(sprintEntity);
     var savedPairs = Optional.ofNullable(savedEntity.getId())

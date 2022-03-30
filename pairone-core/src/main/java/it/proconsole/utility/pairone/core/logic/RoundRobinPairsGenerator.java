@@ -24,7 +24,7 @@ public class RoundRobinPairsGenerator implements PairsGenerator {
     var developers = developerRepository.findByTeamId(teamId);
     var rounds = scheduler.scheduleFor(developers);
     return rounds.stream()
-            .map(round -> new Sprint(teamId, round.id(), getPairsFor(round)))
+            .map(round -> new Sprint(round.id(), getPairsFor(round)))
             .collect(Collectors.toList());
   }
 

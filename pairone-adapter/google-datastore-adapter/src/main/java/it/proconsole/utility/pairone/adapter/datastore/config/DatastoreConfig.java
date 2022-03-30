@@ -66,14 +66,12 @@ public class DatastoreConfig {
   @Bean
   public SprintRepository datastoreSprintRepository(
           SprintEntityRepository sprintEntityRepository,
-          PairRepository datastorePairRepository,
-          PairAdapter pairAdapter
+          PairRepository datastorePairRepository
   ) {
     return new DatastoreSprintRepository(
             sprintEntityRepository,
             datastorePairRepository,
-            new SprintAdapter(),
-            pairAdapter
+            new SprintAdapter()
     );
   }
 

@@ -17,19 +17,20 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PairAdapterTest {
-  private static final Long TEAM_ID = 9L;
+  private static final Long PAIR_ID = 987L;
+  private static final Long SPRINT_ID = 9L;
   private static final Long A_DEVELOPER_ID = 1L;
   private static final Long ANOTHER_DEVELOPER_ID = 2L;
   private static final List<DeveloperEntity> DEVELOPER_ENTITIES = List.of(
-          new DeveloperEntity(A_DEVELOPER_ID, "Dev1", TEAM_ID),
-          new DeveloperEntity(ANOTHER_DEVELOPER_ID, "Dev2", TEAM_ID)
+          new DeveloperEntity(A_DEVELOPER_ID, "Dev1", SPRINT_ID),
+          new DeveloperEntity(ANOTHER_DEVELOPER_ID, "Dev2", SPRINT_ID)
   );
   private static final List<Developer> DOMAIN_DEVELOPERS = List.of(
           new Developer(A_DEVELOPER_ID, "Dev1"),
           new Developer(ANOTHER_DEVELOPER_ID, "Dev2")
   );
-  private static final PairEntity ENTITY = new PairEntity(TEAM_ID, A_DEVELOPER_ID, ANOTHER_DEVELOPER_ID);
-  private static final Pair DOMAIN = new Pair(TEAM_ID + "|" + A_DEVELOPER_ID + "|" + ANOTHER_DEVELOPER_ID, DOMAIN_DEVELOPERS);
+  private static final PairEntity ENTITY = new PairEntity(PAIR_ID, SPRINT_ID, A_DEVELOPER_ID, ANOTHER_DEVELOPER_ID);
+  private static final Pair DOMAIN = new Pair(PAIR_ID, DOMAIN_DEVELOPERS);
 
   @Mock
   private DeveloperAdapter developerAdapter;
@@ -43,7 +44,7 @@ class PairAdapterTest {
 
   @Test
   void fromDomain() {
-    var current = adapter.fromDomain(List.of(DOMAIN), TEAM_ID);
+    var current = adapter.fromDomain(List.of(DOMAIN), SPRINT_ID);
 
     assertEquals(List.of(ENTITY), current);
   }

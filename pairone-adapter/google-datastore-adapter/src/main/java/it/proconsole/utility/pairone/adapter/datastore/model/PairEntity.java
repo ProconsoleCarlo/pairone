@@ -11,33 +11,35 @@ import java.util.Optional;
 @Entity(name = "pairs")
 public class PairEntity {
   @Id
-  private String id;
-  private Long teamId;
+  @Nullable
+  private Long id;
+  private Long sprintId;
   private Long firstDeveloperId;
   @Nullable
   private Long secondDeveloperId;
 
-  public PairEntity(Long teamId, Long firstDeveloperId, @Nullable Long secondDeveloperId) {
-    this.id = teamId + "|" + firstDeveloperId + "|" + secondDeveloperId;
-    this.teamId = teamId;
+  public PairEntity(@Nullable Long id, Long sprintId, Long firstDeveloperId, @Nullable Long secondDeveloperId) {
+    this.id = id;
+    this.sprintId = sprintId;
     this.firstDeveloperId = firstDeveloperId;
     this.secondDeveloperId = secondDeveloperId;
   }
 
-  public String getId() {
+  @Nullable
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Long getTeamId() {
-    return teamId;
+  public Long getSprintId() {
+    return sprintId;
   }
 
-  public void setTeamId(Long teamId) {
-    this.teamId = teamId;
+  public void setSprintId(Long sprintId) {
+    this.sprintId = sprintId;
   }
 
   public Long getFirstDeveloperId() {
@@ -68,11 +70,11 @@ public class PairEntity {
     if (this == o) return true;
     if (!(o instanceof PairEntity)) return false;
     PairEntity that = (PairEntity) o;
-    return id.equals(that.id);
+    return Objects.equals(id, that.id) && sprintId.equals(that.sprintId) && firstDeveloperId.equals(that.firstDeveloperId) && Objects.equals(secondDeveloperId, that.secondDeveloperId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, sprintId, firstDeveloperId, secondDeveloperId);
   }
 }

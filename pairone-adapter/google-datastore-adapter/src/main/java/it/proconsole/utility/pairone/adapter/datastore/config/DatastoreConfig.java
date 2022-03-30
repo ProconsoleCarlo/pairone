@@ -3,15 +3,19 @@ package it.proconsole.utility.pairone.adapter.datastore.config;
 import com.google.cloud.spring.data.datastore.repository.config.EnableDatastoreRepositories;
 import it.proconsole.utility.pairone.adapter.datastore.repository.DatastoreDeveloperRepository;
 import it.proconsole.utility.pairone.adapter.datastore.repository.DatastorePairRepository;
+import it.proconsole.utility.pairone.adapter.datastore.repository.DatastoreSprintRepository;
 import it.proconsole.utility.pairone.adapter.datastore.repository.DatastoreTeamRepository;
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.DeveloperAdapter;
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.PairAdapter;
+import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.SprintAdapter;
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.TeamAdapter;
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.DeveloperEntityRepository;
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.PairEntityRepository;
+import it.proconsole.utility.pairone.adapter.datastore.repository.crud.SprintEntityRepository;
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.TeamEntityRepository;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import it.proconsole.utility.pairone.core.repository.PairRepository;
+import it.proconsole.utility.pairone.core.repository.SprintRepository;
 import it.proconsole.utility.pairone.core.repository.TeamRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,6 +61,18 @@ public class DatastoreConfig {
             pairEntityRepository,
             developerEntityRepository,
             new PairAdapter(developerAdapter)
+    );
+  }
+
+  @Bean
+  public SprintRepository datastoreSprintRepository(
+          SprintEntityRepository sprintEntityRepository,
+          PairRepository datastorePairRepository
+  ) {
+    return new DatastoreSprintRepository(
+            sprintEntityRepository,
+            datastorePairRepository,
+            new SprintAdapter()
     );
   }
 

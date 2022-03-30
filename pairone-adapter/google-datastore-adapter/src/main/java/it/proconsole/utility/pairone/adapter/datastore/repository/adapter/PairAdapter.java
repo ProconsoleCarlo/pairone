@@ -14,12 +14,12 @@ public class PairAdapter {
     this.developerAdapter = developerAdapter;
   }
 
-  public List<PairEntity> fromDomain(List<Pair> pairs, Long teamId) {
-    return pairs.stream().map(it -> fromDomain(it, teamId)).collect(Collectors.toList());
+  public List<PairEntity> fromDomain(List<Pair> pairs, Long sprintId) {
+    return pairs.stream().map(it -> fromDomain(it, sprintId)).collect(Collectors.toList());
   }
 
-  private PairEntity fromDomain(Pair pair, Long teamId) {
-    return new PairEntity(teamId, pair.firstId(), pair.secondId().orElse(null));
+  private PairEntity fromDomain(Pair pair, Long sprintId) {
+    return new PairEntity(pair.id(), sprintId, pair.firstId(), pair.secondId().orElse(null));
   }
 
   public Pair toDomain(PairEntity pair, List<DeveloperEntity> developers) {

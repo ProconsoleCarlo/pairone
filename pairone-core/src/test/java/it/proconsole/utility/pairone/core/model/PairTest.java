@@ -41,6 +41,6 @@ class PairTest {
   }
 
   private Pair aPairWith(Developer... developers) {
-    return new Pair("9|1|2", List.of(developers));
+    return new Pair(1L, List.of(developers));
   }
 }

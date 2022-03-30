@@ -2,6 +2,7 @@ package it.proconsole.utility.pairone.core.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,22 +10,23 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Pair {
-  private final String id;
+  @Nullable
+  private final Long id;
   private final List<Developer> members;
 
   @JsonCreator
-  public Pair(String id, List<Developer> members) {
+  public Pair(@Nullable Long id, List<Developer> members) {
     this.id = id;
     this.members = new ArrayList<>(members);
   }
 
-  public Pair(Long teamId, List<Developer> members) {
-    this.members = members;
-    this.id = teamId + "|" + firstId() + "|" + secondId().orElse(null);
+  public Pair(List<Developer> members) {
+    this(null, members);
   }
 
   @JsonGetter
-  public String id() {
+  @Nullable
+  public Long id() {
     return id;
   }
 
@@ -48,7 +50,7 @@ public class Pair {
     if (this == o) return true;
     if (!(o instanceof Pair)) return false;
     Pair pair = (Pair) o;
-    return id.equals(pair.id) && members.equals(pair.members);
+    return Objects.equals(id, pair.id) && members.equals(pair.members);
   }
 
   @Override

@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = PairController.class)
 class PairControllerTest {
-  private static final Long TEAM_ID = 123L;
+  private static final Long SPRINT_ID = 123L;
   private static final String PAIRS_SAVED_JSON = "/pair/pairsSaved.json";
   private static final String PAIRS_TO_SAVE_JSON = "/pair/pairsToSave.json";
 
@@ -38,14 +38,14 @@ class PairControllerTest {
 
   @Test
   void getPairs() throws Exception {
-    when(pairRepository.findByTeamId(TEAM_ID))
+    when(pairRepository.findBySprintId(SPRINT_ID))
             .thenReturn(Fixtures.readListFromClasspath(PAIRS_SAVED_JSON, Pair.class));
 
-    mvc.perform(get("/team/{teamId}/pair", TEAM_ID))
+    mvc.perform(get("/team/{sprintId}/pair", SPRINT_ID))
             .andExpect(status().isOk())
             .andExpect(content().json(Fixtures.readFromClasspath(PAIRS_SAVED_JSON)));
 
-    verify(pairRepository, times(1)).findByTeamId(TEAM_ID);
+    verify(pairRepository, times(1)).findBySprintId(SPRINT_ID);
     verifyNoMoreInteractions(pairRepository);
   }
 
@@ -54,14 +54,14 @@ class PairControllerTest {
     when(pairRepository.saveAll(anyLong(), anyList()))
             .thenReturn(Fixtures.readListFromClasspath(PAIRS_SAVED_JSON, Pair.class));
 
-    mvc.perform(post("/team/{teamId}/pair", TEAM_ID)
+    mvc.perform(post("/team/{sprintId}/pair", SPRINT_ID)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(Fixtures.readFromClasspath(PAIRS_TO_SAVE_JSON)))
             .andExpect(status().isOk())
             .andExpect(content().json(Fixtures.readFromClasspath(PAIRS_SAVED_JSON)));
 
     verify(pairRepository, times(1))
-            .saveAll(TEAM_ID, Fixtures.readListFromClasspath(PAIRS_TO_SAVE_JSON, Pair.class));
+            .saveAll(SPRINT_ID, Fixtures.readListFromClasspath(PAIRS_TO_SAVE_JSON, Pair.class));
     verifyNoMoreInteractions(pairRepository);
   }
 }

@@ -25,8 +25,8 @@ public class DatastorePairRepository implements PairRepository {
   }
 
   @Override
-  public List<Pair> findByTeamId(Long teamId) {
-    return entityRepository.findByTeamId(teamId).stream()
+  public List<Pair> findBySprintId(Long sprintId) {
+    return entityRepository.findBySprintId(sprintId).stream()
             .map(entity -> {
               var developers = developerEntityRepository.findAllById(entity.developerIds());
               return pairAdapter.toDomain(entity, developers);
@@ -34,8 +34,8 @@ public class DatastorePairRepository implements PairRepository {
   }
 
   @Override
-  public List<Pair> saveAll(Long teamId, List<Pair> pairs) {
-    entityRepository.saveAll(pairAdapter.fromDomain(pairs, teamId));
-    return findByTeamId(teamId);
+  public List<Pair> saveAll(Long sprintId, List<Pair> pairs) {
+    entityRepository.saveAll(pairAdapter.fromDomain(pairs, sprintId));
+    return findBySprintId(sprintId);
   }
 }

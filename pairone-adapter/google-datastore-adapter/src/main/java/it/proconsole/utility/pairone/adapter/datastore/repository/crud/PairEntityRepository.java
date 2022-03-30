@@ -6,5 +6,5 @@ import it.proconsole.utility.pairone.adapter.datastore.model.PairEntity;
 import java.util.List;
 
 public interface PairEntityRepository extends DatastoreRepository<PairEntity, String> {
-  List<PairEntity> findByTeamId(Long teamId);
+  List<PairEntity> findBySprintId(Long sprintId);
 }

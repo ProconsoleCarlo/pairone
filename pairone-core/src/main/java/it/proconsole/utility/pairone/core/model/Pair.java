@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public class Pair {
   private final String id;
-  //TODO rename
   private final List<Developer> members;
 
   @JsonCreator

@@ -1,6 +1,6 @@
 package it.proconsole.utility.pairone.rest.controller;
 
-import it.proconsole.utility.pairone.core.logic.PairsGenerator;
+import it.proconsole.utility.pairone.core.logic.SprintsGenerator;
 import it.proconsole.utility.pairone.core.model.Sprint;
 import it.proconsole.utility.pairone.core.repository.SprintRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +14,14 @@ import java.util.List;
 @RestController
 public class SprintController {
   private final SprintRepository sprintRepository;
-  private final PairsGenerator pairsGenerator;
+  private final SprintsGenerator sprintsGenerator;
 
   public SprintController(
           SprintRepository datastoreSprintRepository,
-          PairsGenerator pairsGenerator
+          SprintsGenerator sprintsGenerator
   ) {
     this.sprintRepository = datastoreSprintRepository;
-    this.pairsGenerator = pairsGenerator;
+    this.sprintsGenerator = sprintsGenerator;
   }
 
   @GetMapping("/team/{teamId}/sprint")
@@ -31,7 +31,7 @@ public class SprintController {
 
   @PostMapping("/team/{teamId}/sprint/create")
   public List<Sprint> createSprints(@PathVariable Long teamId) {
-    var sprints = pairsGenerator.generateFor(teamId);
+    var sprints = sprintsGenerator.generateFor(teamId);
     return sprintRepository.saveAll(teamId, sprints);
   }
 

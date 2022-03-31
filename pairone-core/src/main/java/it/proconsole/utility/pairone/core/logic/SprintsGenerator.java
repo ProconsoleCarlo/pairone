@@ -4,6 +4,6 @@ import it.proconsole.utility.pairone.core.model.Sprint;
 
 import java.util.List;
 
-public interface PairsGenerator {
+public interface SprintsGenerator {
   List<Sprint> generateFor(Long teamId);
 }

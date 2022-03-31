@@ -10,11 +10,11 @@ import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RoundRobinPairsGenerator implements PairsGenerator {
+public class RoundRobinSprintsGenerator implements SprintsGenerator {
   private final DeveloperRepository developerRepository;
   private final Scheduler<Developer> scheduler;
 
-  public RoundRobinPairsGenerator(DeveloperRepository developerRepository, Scheduler<Developer> scheduler) {
+  public RoundRobinSprintsGenerator(DeveloperRepository developerRepository, Scheduler<Developer> scheduler) {
     this.developerRepository = developerRepository;
     this.scheduler = scheduler;
   }

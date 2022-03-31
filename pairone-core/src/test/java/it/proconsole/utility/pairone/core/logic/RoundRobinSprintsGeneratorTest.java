@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class RoundRobinPairsGeneratorTest {
+class RoundRobinSprintsGeneratorTest {
   private static final Long TEAM_ID = 1L;
 
   @Mock
@@ -27,11 +27,11 @@ class RoundRobinPairsGeneratorTest {
   @Mock
   private Scheduler<Developer> scheduler;
 
-  private PairsGenerator generator;
+  private SprintsGenerator generator;
 
   @BeforeEach
   void setUp() {
-    generator = new RoundRobinPairsGenerator(developerRepository, scheduler);
+    generator = new RoundRobinSprintsGenerator(developerRepository, scheduler);
   }
 
   @Test

@@ -49,10 +49,6 @@ public class Developer {
     return teamId;
   }
 
-  public Builder copy() {
-    return new Builder(this);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -73,30 +69,5 @@ public class Developer {
             ", nickName='" + nickName + '\'' +
             ", teamId=" + teamId +
             '}';
-  }
-
-  public static class Builder {
-    @Nullable
-    private Long id;
-    private String nickName;
-
-    public Builder(Developer developer) {
-      this.id = developer.id;
-      this.nickName = developer.nickName;
-    }
-
-    public Builder withId(@Nullable Long id) {
-      this.id = id;
-      return this;
-    }
-
-    public Builder withNickName(String nickName) {
-      this.nickName = nickName;
-      return this;
-    }
-
-    public Developer build() {
-      return new Developer(id, nickName);
-    }
   }
 }

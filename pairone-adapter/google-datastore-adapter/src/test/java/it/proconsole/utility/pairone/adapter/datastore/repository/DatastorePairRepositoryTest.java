@@ -23,8 +23,10 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DatastorePairRepositoryTest {
-  private static final Long TEAM_ID = 9L;
+  private static final Long TEAM_ID = 987L;
   private static final Long SPRINT_ID = 9L;
+  private static final Long PAIR_ID = 123L;
+  private static final Long ANOTHER_PAIR_ID = 456L;
   private static final Long A_DEVELOPER_ID = 1L;
   private static final Long ANOTHER_DEVELOPER_ID = 2L;
   private static final List<DeveloperEntity> DEVELOPER_ENTITIES = List.of(
@@ -35,11 +37,11 @@ class DatastorePairRepositoryTest {
           new Developer(A_DEVELOPER_ID, "Dev1"),
           new Developer(ANOTHER_DEVELOPER_ID, "Dev2")
   );
-  private static final PairEntity A_PAIR_ENTITY = new PairEntity(SPRINT_ID, TEAM_ID, A_DEVELOPER_ID, ANOTHER_DEVELOPER_ID);
-  private static final PairEntity ANOTHER_PAIR_ENTITY = new PairEntity(SPRINT_ID, TEAM_ID, ANOTHER_DEVELOPER_ID, A_DEVELOPER_ID);
+  private static final PairEntity A_PAIR_ENTITY = new PairEntity(PAIR_ID, SPRINT_ID, A_DEVELOPER_ID, ANOTHER_DEVELOPER_ID);
+  private static final PairEntity ANOTHER_PAIR_ENTITY = new PairEntity(ANOTHER_PAIR_ID, SPRINT_ID, ANOTHER_DEVELOPER_ID, A_DEVELOPER_ID);
   private static final List<PairEntity> PAIR_ENTITIES = List.of(A_PAIR_ENTITY, ANOTHER_PAIR_ENTITY);
-  private static final Pair A_DOMAIN_PAIR = new Pair(SPRINT_ID, DOMAIN_DEVELOPERS);
-  private static final Pair ANOTHER_DOMAIN_PAIR = new Pair(SPRINT_ID, DOMAIN_DEVELOPERS);
+  private static final Pair A_DOMAIN_PAIR = new Pair(PAIR_ID, DOMAIN_DEVELOPERS);
+  private static final Pair ANOTHER_DOMAIN_PAIR = new Pair(ANOTHER_PAIR_ID, DOMAIN_DEVELOPERS);
   private static final List<Pair> DOMAIN_PAIRS = List.of(A_DOMAIN_PAIR, ANOTHER_DOMAIN_PAIR);
 
   @Mock

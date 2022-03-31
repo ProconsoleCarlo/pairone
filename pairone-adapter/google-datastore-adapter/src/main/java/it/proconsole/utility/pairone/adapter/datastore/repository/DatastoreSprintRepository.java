@@ -49,6 +49,6 @@ public class DatastoreSprintRepository implements SprintRepository {
     var savedPairs = Optional.ofNullable(savedEntity.getId())
             .map(sprintId -> pairRepository.saveAll(sprintId, sprint.pairs()))
             .orElseThrow(EntityNotSavedException::forSprint);
-    return sprintAdapter.toDomain(sprintEntity, savedPairs);
+    return sprintAdapter.toDomain(savedEntity, savedPairs);
   }
 }

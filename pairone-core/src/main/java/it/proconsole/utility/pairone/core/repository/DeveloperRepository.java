@@ -7,6 +7,8 @@ import java.util.List;
 public interface DeveloperRepository {
   List<Developer> findAll();
 
+  List<Developer> findAllById(List<Long> teamIds);
+
   List<Developer> findByTeamId(Long teamId);
 
   Developer save(Developer developer);

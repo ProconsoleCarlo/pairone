@@ -53,12 +53,12 @@ public class DatastoreConfig {
   @Bean
   public PairRepository datastorePairRepository(
           PairEntityRepository pairEntityRepository,
-          DeveloperEntityRepository developerEntityRepository,
+          DeveloperRepository developerRepository,
           PairAdapter pairAdapter
   ) {
     return new DatastorePairRepository(
             pairEntityRepository,
-            developerEntityRepository,
+            developerRepository,
             pairAdapter
     );
   }
@@ -76,8 +76,8 @@ public class DatastoreConfig {
   }
 
   @Bean
-  public PairAdapter pairAdapter(DeveloperAdapter developerAdapter) {
-    return new PairAdapter(developerAdapter);
+  public PairAdapter pairAdapter() {
+    return new PairAdapter();
   }
 
   @Bean

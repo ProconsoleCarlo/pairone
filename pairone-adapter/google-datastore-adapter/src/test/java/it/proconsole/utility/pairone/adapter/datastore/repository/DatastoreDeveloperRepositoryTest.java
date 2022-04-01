@@ -59,6 +59,23 @@ class DatastoreDeveloperRepositoryTest {
   }
 
   @Test
+  void findAllById() {
+    var ids = List.of(1L, 2L);
+    var entities = List.of(
+            new DeveloperEntity(1L, "Dev1", TEAM_ID),
+            new DeveloperEntity(2L, "Dev2", TEAM_ID)
+    );
+    var domain = List.of(
+            new Developer(1L, "Dev1", TEAM_ID),
+            new Developer(2L, "Dev2", TEAM_ID)
+    );
+    when(developerEntityRepository.findAllById(ids)).thenReturn(entities);
+    when(developerAdapter.toDomain(entities)).thenReturn(domain);
+
+    assertEquals(domain, repository.findAllById(ids));
+  }
+
+  @Test
   void findByTeamId() {
     var entities = List.of(
             new DeveloperEntity(1L, "Dev1", TEAM_ID),

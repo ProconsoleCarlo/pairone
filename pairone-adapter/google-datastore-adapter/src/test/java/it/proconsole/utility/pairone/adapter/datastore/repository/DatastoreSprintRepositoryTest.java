@@ -20,6 +20,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -48,6 +50,16 @@ class DatastoreSprintRepositoryTest {
   @BeforeEach
   void setUp() {
     repository = new DatastoreSprintRepository(sprintEntityRepository, pairRepository, sprintAdapter);
+  }
+
+  @Test
+  void deleteByTeamId() {
+    when(sprintEntityRepository.findByTeamId(TEAM_ID)).thenReturn(List.of(ENTITY_SAVED));
+
+    repository.deleteByTeamId(TEAM_ID);
+
+    verify(sprintEntityRepository, times(1)).deleteByTeamId(TEAM_ID);
+    verify(pairRepository, times(1)).deleteAllBySprintId(List.of(SPRINT_ID));
   }
 
   @Test

@@ -33,7 +33,7 @@ public class RoundRobinSprintsGenerator implements SprintsGenerator {
     var sprints = rounds.stream()
             .map(round -> new Sprint(round.id(), getPairsFor(round)))
             .collect(Collectors.toList());
-    //TODO delete before create
+    sprintRepository.deleteByTeamId(teamId);
     return sprintRepository.saveAll(teamId, sprints);
   }
 

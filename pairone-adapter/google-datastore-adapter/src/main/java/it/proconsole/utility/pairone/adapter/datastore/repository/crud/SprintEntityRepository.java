@@ -6,6 +6,8 @@ import it.proconsole.utility.pairone.adapter.datastore.model.SprintEntity;
 import java.util.List;
 
 public interface SprintEntityRepository extends DatastoreRepository<SprintEntity, String> {
+  void deleteByTeamId(Long teamId);
+
   List<SprintEntity> findByTeamId(Long teamId);
 
   @Override

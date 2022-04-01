@@ -1,6 +1,7 @@
 package it.proconsole.utility.pairone.adapter.datastore.repository;
 
 import it.proconsole.utility.pairone.adapter.datastore.exception.EntityNotSavedException;
+import it.proconsole.utility.pairone.adapter.datastore.model.SprintEntity;
 import it.proconsole.utility.pairone.adapter.datastore.repository.adapter.SprintAdapter;
 import it.proconsole.utility.pairone.adapter.datastore.repository.crud.SprintEntityRepository;
 import it.proconsole.utility.pairone.core.model.Sprint;
@@ -24,6 +25,13 @@ public class DatastoreSprintRepository implements SprintRepository {
     this.entityRepository = entityRepository;
     this.pairRepository = pairRepository;
     this.sprintAdapter = sprintAdapter;
+  }
+
+  @Override
+  public void deleteByTeamId(Long teamId) {
+    var existingSprints = entityRepository.findByTeamId(teamId);
+    pairRepository.deleteAllBySprintId(existingSprints.stream().map(SprintEntity::getId).collect(Collectors.toList()));
+    entityRepository.deleteByTeamId(teamId);
   }
 
   @Override

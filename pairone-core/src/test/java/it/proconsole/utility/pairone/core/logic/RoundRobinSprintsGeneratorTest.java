@@ -7,6 +7,7 @@ import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.model.Pair;
 import it.proconsole.utility.pairone.core.model.Sprint;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
+import it.proconsole.utility.pairone.core.repository.SprintRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,13 +26,15 @@ class RoundRobinSprintsGeneratorTest {
   @Mock
   private DeveloperRepository developerRepository;
   @Mock
+  private SprintRepository sprintRepository;
+  @Mock
   private Scheduler<Developer> scheduler;
 
   private SprintsGenerator generator;
 
   @BeforeEach
   void setUp() {
-    generator = new RoundRobinSprintsGenerator(developerRepository, scheduler);
+    generator = new RoundRobinSprintsGenerator(developerRepository, sprintRepository, scheduler);
   }
 
   @Test

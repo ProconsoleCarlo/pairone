@@ -3,7 +3,7 @@ GET {{baseUrl}}/team/{{teamId}}/sprint
 Accept: application/json
 
 ### createSprints
-POST {{baseUrl}}/team/{{teamId}}/sprint/create
+PUT {{baseUrl}}/team/{{teamId}}/sprint/create
 Content-Type: application/json
 
 ### saveSprints

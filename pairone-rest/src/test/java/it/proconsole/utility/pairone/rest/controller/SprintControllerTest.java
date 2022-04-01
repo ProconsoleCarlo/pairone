@@ -17,10 +17,12 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,10 +52,7 @@ class SprintControllerTest {
 
     verify(sprintRepository, times(1)).findByTeamId(TEAM_ID);
     verifyNoMoreInteractions(sprintRepository);
-  }
-
-  @Test
-  void createSprints() {
+    verifyNoInteractions(sprintsGenerator);
   }
 
   @Test
@@ -69,5 +68,19 @@ class SprintControllerTest {
 
     verify(sprintRepository, times(1)).saveAll(TEAM_ID, Fixtures.readListFromClasspath(SPRINTS_TO_SAVE_JSON, Sprint.class));
     verifyNoMoreInteractions(sprintRepository);
+    verifyNoInteractions(sprintsGenerator);
+  }
+
+  @Test
+  void createSprints() throws Exception {
+    when(sprintsGenerator.generateFor(anyLong()))
+            .thenReturn(Fixtures.readListFromClasspath(SPRINTS_SAVED_JSON, Sprint.class));
+
+    mvc.perform(put("/team/{teamId}/sprint/create", TEAM_ID))
+            .andExpect(status().isOk())
+            .andExpect(content().json(Fixtures.readFromClasspath(SPRINTS_SAVED_JSON)));
+
+    verify(sprintsGenerator, times(1)).generateFor(TEAM_ID);
+    verifyNoInteractions(sprintRepository);
   }
 }

@@ -6,16 +6,23 @@ import it.proconsole.utility.pairone.core.model.Developer;
 import it.proconsole.utility.pairone.core.model.Pair;
 import it.proconsole.utility.pairone.core.model.Sprint;
 import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
+import it.proconsole.utility.pairone.core.repository.SprintRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RoundRobinSprintsGenerator implements SprintsGenerator {
   private final DeveloperRepository developerRepository;
+  private final SprintRepository sprintRepository;
   private final Scheduler<Developer> scheduler;
 
-  public RoundRobinSprintsGenerator(DeveloperRepository developerRepository, Scheduler<Developer> scheduler) {
+  public RoundRobinSprintsGenerator(
+          DeveloperRepository developerRepository,
+          SprintRepository sprintRepository,
+          Scheduler<Developer> scheduler
+  ) {
     this.developerRepository = developerRepository;
+    this.sprintRepository = sprintRepository;
     this.scheduler = scheduler;
   }
 
@@ -23,9 +30,11 @@ public class RoundRobinSprintsGenerator implements SprintsGenerator {
   public List<Sprint> generateFor(Long teamId) {
     var developers = developerRepository.findByTeamId(teamId);
     var rounds = scheduler.scheduleFor(developers);
-    return rounds.stream()
+    var sprints = rounds.stream()
             .map(round -> new Sprint(round.id(), getPairsFor(round)))
             .collect(Collectors.toList());
+    //TODO delete before create
+    return sprintRepository.saveAll(teamId, sprints);
   }
 
   private List<Pair> getPairsFor(Round<Developer> round) {

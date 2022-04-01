@@ -17,6 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,18 +47,25 @@ class RoundRobinSprintsGeneratorTest {
             new Round<>(2L, List.of(new Match<>(1L, dev(1L), dev(3L)), new Match<>(2L, dev(2L)))),
             new Round<>(3L, List.of(new Match<>(1L, dev(1L), dev(2L)), new Match<>(2L, dev(3L))))
     );
-    when(developerRepository.findByTeamId(TEAM_ID)).thenReturn(developers);
-    when(scheduler.scheduleFor(developers)).thenReturn(rounds);
-
-    var current = generator.generateFor(TEAM_ID);
-
     var expected = List.of(
             new Sprint(1L, List.of(new Pair(List.of(dev(1L))), new Pair(List.of(dev(2L), dev(3L))))),
             new Sprint(2L, List.of(new Pair(List.of(dev(1L), dev(3L))), new Pair(List.of(dev(2L))))),
             new Sprint(3L, List.of(new Pair(List.of(dev(1L), dev(2L))), new Pair(List.of(dev(3L)))))
     );
+    var savedSprints = List.of(
+            new Sprint(1L, 1L, List.of(new Pair(1L, List.of(dev(1L))), new Pair(2L, List.of(dev(2L), dev(3L))))),
+            new Sprint(2L, 2L, List.of(new Pair(3L, List.of(dev(1L), dev(3L))), new Pair(4L, List.of(dev(2L))))),
+            new Sprint(3L, 3L, List.of(new Pair(5L, List.of(dev(1L), dev(2L))), new Pair(6L, List.of(dev(3L)))))
+    );
+    when(developerRepository.findByTeamId(TEAM_ID)).thenReturn(developers);
+    when(scheduler.scheduleFor(developers)).thenReturn(rounds);
+    when(sprintRepository.saveAll(TEAM_ID, expected)).thenReturn(savedSprints);
 
-    assertEquals(expected, current);
+    var current = generator.generateFor(TEAM_ID);
+
+
+    assertEquals(savedSprints, current);
+    verify(sprintRepository, times(1)).deleteByTeamId(TEAM_ID);
   }
 
   private Developer dev(Long id) {

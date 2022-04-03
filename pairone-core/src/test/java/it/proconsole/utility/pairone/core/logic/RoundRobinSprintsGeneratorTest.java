@@ -63,12 +63,11 @@ class RoundRobinSprintsGeneratorTest {
 
     var current = generator.generateFor(TEAM_ID);
 
-
     assertEquals(savedSprints, current);
     verify(sprintRepository, times(1)).deleteByTeamId(TEAM_ID);
   }
 
   private Developer dev(Long id) {
-    return new Developer(id, "a");
+    return new Developer(id, "Dev" + id);
   }
 }

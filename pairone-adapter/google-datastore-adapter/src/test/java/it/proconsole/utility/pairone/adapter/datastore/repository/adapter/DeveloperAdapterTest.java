@@ -2,6 +2,7 @@ package it.proconsole.utility.pairone.adapter.datastore.repository.adapter;
 
 import it.proconsole.utility.pairone.adapter.datastore.model.DeveloperEntity;
 import it.proconsole.utility.pairone.core.model.Developer;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,21 +21,37 @@ class DeveloperAdapterTest {
 
   private final DeveloperAdapter adapter = new DeveloperAdapter();
 
-  @Test
-  void fromDomain() {
-    assertEquals(ENTITIES, adapter.fromDomain(DOMAIN));
+  @Nested
+  class FromDomain {
+    @Test
+    void multipleEntitiesWithTeamId() {
+      var domain = List.of(new Developer("Dev1"));
+      var entities = List.of(new DeveloperEntity("Dev1", 123L));
+
+      assertEquals(entities, adapter.fromDomain(domain, 123L));
+    }
+
+    @Test
+    void multipleEntities() {
+      assertEquals(ENTITIES, adapter.fromDomain(DOMAIN));
+    }
+
+    @Test
+    void singleEntity() {
+      assertEquals(ENTITIES.get(0), adapter.fromDomain(DOMAIN.get(0)));
+    }
   }
 
-  @Test
-  void fromDomainWithTeamId() {
-    var domain = List.of(new Developer("Dev1"));
-    var entities = List.of(new DeveloperEntity("Dev1", 123L));
+  @Nested
+  class ToDomain {
+    @Test
+    void multipleEntities() {
+      assertEquals(DOMAIN, adapter.toDomain(ENTITIES));
+    }
 
-    assertEquals(entities, adapter.fromDomain(domain, 123L));
-  }
-
-  @Test
-  void toDomain() {
-    assertEquals(DOMAIN, adapter.toDomain(ENTITIES));
+    @Test
+    void singleEntity() {
+      assertEquals(DOMAIN.get(0), adapter.toDomain(ENTITIES.get(0)));
+    }
   }
 }

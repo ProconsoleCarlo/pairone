@@ -18,13 +18,13 @@ public class PairController {
     this.pairRepository = datastorePairRepository;
   }
 
-  @GetMapping("/team/{teamId}/pair")
-  public List<Pair> getPairs(@PathVariable Long teamId) {
-    return pairRepository.findByTeamId(teamId);
+  @GetMapping("/team/{sprintId}/pair")
+  public List<Pair> getPairs(@PathVariable Long sprintId) {
+    return pairRepository.findBySprintId(sprintId);
   }
 
-  @PostMapping("/team/{teamId}/pair")
-  public List<Pair> savePairs(@PathVariable Long teamId, @RequestBody List<Pair> pairs) {
-    return pairRepository.saveAll(teamId, pairs);
+  @PostMapping("/team/{sprintId}/pair")
+  public List<Pair> savePairs(@PathVariable Long sprintId, @RequestBody List<Pair> pairs) {
+    return pairRepository.saveAll(sprintId, pairs);
   }
 }

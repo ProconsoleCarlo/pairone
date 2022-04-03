@@ -11,23 +11,33 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 public class DatastoreDeveloperRepository implements DeveloperRepository {
-  private final DeveloperEntityRepository developerEntityRepository;
+  private final DeveloperEntityRepository entityRepository;
   private final TeamEntityRepository teamEntityRepository;
   private final DeveloperAdapter developerAdapter;
 
   public DatastoreDeveloperRepository(
-          DeveloperEntityRepository developerEntityRepository,
+          DeveloperEntityRepository entityRepository,
           TeamEntityRepository teamEntityRepository,
           DeveloperAdapter developerAdapter
   ) {
-    this.developerEntityRepository = developerEntityRepository;
+    this.entityRepository = entityRepository;
     this.teamEntityRepository = teamEntityRepository;
     this.developerAdapter = developerAdapter;
   }
 
   @Override
   public List<Developer> findAll() {
-    return developerAdapter.toDomain(developerEntityRepository.findAll());
+    return developerAdapter.toDomain(entityRepository.findAll());
+  }
+
+  @Override
+  public List<Developer> findAllById(List<Long> teamIds) {
+    return developerAdapter.toDomain(entityRepository.findAllById(teamIds));
+  }
+
+  @Override
+  public List<Developer> findByTeamId(Long teamId) {
+    return developerAdapter.toDomain(entityRepository.findByTeamId(teamId));
   }
 
   @Override
@@ -36,7 +46,7 @@ public class DatastoreDeveloperRepository implements DeveloperRepository {
       throw EntityNotFoundException.forTeam(developer.teamId());
     }
     var entity = developerAdapter.fromDomain(developer);
-    var savedEntity = developerEntityRepository.save(entity);
+    var savedEntity = entityRepository.save(entity);
     return developerAdapter.toDomain(savedEntity);
   }
 

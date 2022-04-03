@@ -43,7 +43,7 @@ public class DatastoreTeamRepository implements TeamRepository {
                       var developerEntities = developerAdapter.fromDomain(team.developers(), savedTeam.getId());
                       return developerEntityRepository.saveAll(developerEntities);
                     }
-            ).orElseThrow(() -> new EntityNotSavedException("TeamEntity"));
+            ).orElseThrow(() -> EntityNotSavedException.forTeam(team));
     return teamAdapter.toDomain(savedTeam, savedDevelopers);
   }
 }

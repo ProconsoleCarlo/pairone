@@ -1,0 +1,108 @@
+### getSprints
+GET {{baseUrl}}/team/{{teamId}}/sprint
+Accept: application/json
+
+### createSprints
+PUT {{baseUrl}}/team/{{teamId}}/sprint/create
+Content-Type: application/json
+
+### saveSprints
+POST {{baseUrl}}/team/{{teamId}}/sprint
+Accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "id": 5095696621371392,
+    "round": 1,
+    "pairs": [
+      {
+        "id": 5146163359514624,
+        "members": [
+          {
+            "id": 5671636300726272,
+            "nickName": "Dev3",
+            "teamId": 5677459739508736
+          }
+        ]
+      },
+      {
+        "id": 5644523313037312,
+        "members": [
+          {
+            "id": 5709113312935936,
+            "nickName": "Dev1",
+            "teamId": 5677459739508736
+          },
+          {
+            "id": 5743670015819776,
+            "nickName": "Dev2",
+            "teamId": 5677459739508736
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5714080711049216,
+    "round": 3,
+    "pairs": [
+      {
+        "id": 5118606849343488,
+        "members": [
+          {
+            "id": 5709113312935936,
+            "nickName": "Dev1",
+            "teamId": 5677459739508736
+          },
+          {
+            "id": 5671636300726272,
+            "nickName": "Dev3",
+            "teamId": 5677459739508736
+          }
+        ]
+      },
+      {
+        "id": 5178764845645824,
+        "members": [
+          {
+            "id": 5743670015819776,
+            "nickName": "Dev2",
+            "teamId": 5677459739508736
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5735810494103552,
+    "round": 2,
+    "pairs": [
+      {
+        "id": 5085025104035840,
+        "members": [
+          {
+            "id": 5709113312935936,
+            "nickName": "Dev1",
+            "teamId": 5677459739508736
+          }
+        ]
+      },
+      {
+        "id": 5647975057457152,
+        "members": [
+          {
+            "id": 5671636300726272,
+            "nickName": "Dev3",
+            "teamId": 5677459739508736
+          },
+          {
+            "id": 5743670015819776,
+            "nickName": "Dev2",
+            "teamId": 5677459739508736
+          }
+        ]
+      }
+    ]
+  }
+]

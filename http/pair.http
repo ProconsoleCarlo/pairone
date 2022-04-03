@@ -1,15 +1,15 @@
 ### getPairs
-GET {{baseUrl}}/team/{{teamId}}/pair
+GET {{baseUrl}}/team/{{sprintId}}/pair
 Accept: application/json
 
 ### savePairs
-POST {{baseUrl}}/team/{{teamId}}/pair
+POST {{baseUrl}}/team/{{sprintId}}/pair
 Accept: application/json
 Content-Type: application/json
 
 [
   {
-    "id": "{{teamId}}|1|2",
+    "id": 1,
     "members": [
       {
         "id": 1,
@@ -22,7 +22,7 @@ Content-Type: application/json
     ]
   },
   {
-    "id": "{{teamId}}|2|1",
+    "id": 2,
     "members": [
       {
         "id": 2,

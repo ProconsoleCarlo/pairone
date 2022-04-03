@@ -19,10 +19,10 @@ public class SprintController {
 
   public SprintController(
           SprintRepository datastoreSprintRepository,
-          SprintsGenerator sprintsGenerator
+          SprintsGenerator roundRobinSprintsGenerator
   ) {
     this.sprintRepository = datastoreSprintRepository;
-    this.sprintsGenerator = sprintsGenerator;
+    this.sprintsGenerator = roundRobinSprintsGenerator;
   }
 
   @GetMapping("/team/{teamId}/sprint")

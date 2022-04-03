@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
   @Bean
-  public SprintsGenerator pairsGenerator(
+  public SprintsGenerator roundRobinSprintsGenerator(
           DeveloperRepository datastoreDeveloperRepository,
           SprintRepository datastoreSprintRepository
   ) {

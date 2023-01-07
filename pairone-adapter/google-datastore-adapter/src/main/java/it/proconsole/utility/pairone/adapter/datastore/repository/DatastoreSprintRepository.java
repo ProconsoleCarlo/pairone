@@ -10,7 +10,6 @@ import it.proconsole.utility.pairone.core.repository.SprintRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class DatastoreSprintRepository implements SprintRepository {
   private final SprintEntityRepository entityRepository;
@@ -30,7 +29,7 @@ public class DatastoreSprintRepository implements SprintRepository {
   @Override
   public void deleteByTeamId(Long teamId) {
     var existingSprints = entityRepository.findByTeamId(teamId);
-    pairRepository.deleteAllBySprintId(existingSprints.stream().map(SprintEntity::getId).collect(Collectors.toList()));
+    pairRepository.deleteAllBySprintId(existingSprints.stream().map(SprintEntity::getId).toList());
     entityRepository.deleteByTeamId(teamId);
   }
 
@@ -39,15 +38,15 @@ public class DatastoreSprintRepository implements SprintRepository {
     return entityRepository.findByTeamId(teamId).stream()
             .map(sprint -> Optional.ofNullable(sprint.getId())
                     .map(sprintId -> sprintAdapter.toDomain(sprint, pairRepository.findBySprintId(sprintId)))
-                    .orElseThrow(() -> EntityNotSavedException.forSprint(sprint))).collect(Collectors.toList()
-            );
+                    .orElseThrow(() -> EntityNotSavedException.forSprint(sprint)))
+            .toList();
   }
 
   @Override
   public List<Sprint> saveAll(Long teamId, List<Sprint> sprints) {
     return sprints.stream()
             .map(sprint -> save(teamId, sprint))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   @Override

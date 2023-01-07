@@ -48,8 +48,7 @@ public class SprintEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof SprintEntity)) return false;
-    SprintEntity that = (SprintEntity) o;
+    if (!(o instanceof SprintEntity that)) return false;
     return Objects.equals(id, that.id) && teamId.equals(that.teamId) && round.equals(that.round);
   }
 

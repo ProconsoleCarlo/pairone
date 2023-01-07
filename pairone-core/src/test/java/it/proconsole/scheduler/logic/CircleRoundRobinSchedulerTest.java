@@ -61,8 +61,7 @@ class CircleRoundRobinSchedulerTest {
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (!(o instanceof Player)) return false;
-      Player player = (Player) o;
+      if (!(o instanceof Player player)) return false;
       return id.equals(player.id);
     }
 

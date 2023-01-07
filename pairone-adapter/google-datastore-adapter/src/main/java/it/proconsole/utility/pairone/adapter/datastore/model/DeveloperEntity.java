@@ -68,8 +68,7 @@ public class DeveloperEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof DeveloperEntity)) return false;
-    DeveloperEntity that = (DeveloperEntity) o;
+    if (!(o instanceof DeveloperEntity that)) return false;
     return Objects.equals(id, that.id) && nickName.equals(that.nickName) && Objects.equals(teamId, that.teamId);
   }
 

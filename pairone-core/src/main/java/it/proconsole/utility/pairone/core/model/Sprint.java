@@ -43,8 +43,7 @@ public class Sprint {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Sprint)) return false;
-    Sprint sprint = (Sprint) o;
+    if (!(o instanceof Sprint sprint)) return false;
     return Objects.equals(id, sprint.id) && round.equals(sprint.round) && pairs.equals(sprint.pairs);
   }
 

@@ -36,8 +36,7 @@ public class Match<P> {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Match)) return false;
-    Match<?> match = (Match<?>) o;
+    if (!(o instanceof Match<?> match)) return false;
     return id.equals(match.id) && firstPlayer.equals(match.firstPlayer) && Objects.equals(secondPlayer, match.secondPlayer);
   }
 

@@ -52,8 +52,7 @@ public class Developer {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Developer)) return false;
-    Developer developer = (Developer) o;
+    if (!(o instanceof Developer developer)) return false;
     return Objects.equals(id, developer.id) && nickName.equals(developer.nickName) && Objects.equals(teamId, developer.teamId);
   }
 

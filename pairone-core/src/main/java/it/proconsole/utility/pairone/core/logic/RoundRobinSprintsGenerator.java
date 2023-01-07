@@ -9,7 +9,6 @@ import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import it.proconsole.utility.pairone.core.repository.SprintRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RoundRobinSprintsGenerator implements SprintsGenerator {
   private final DeveloperRepository developerRepository;
@@ -32,7 +31,7 @@ public class RoundRobinSprintsGenerator implements SprintsGenerator {
     var rounds = scheduler.scheduleFor(developers);
     var sprints = rounds.stream()
             .map(round -> new Sprint(round.id(), getPairsFor(round)))
-            .collect(Collectors.toList());
+            .toList();
     sprintRepository.deleteByTeamId(teamId);
     return sprintRepository.saveAll(teamId, sprints);
   }
@@ -42,6 +41,6 @@ public class RoundRobinSprintsGenerator implements SprintsGenerator {
             .map(match -> match.secondPlayer()
                     .map(it -> new Pair(List.of(match.firstPlayer(), it)))
                     .orElseGet(() -> new Pair(List.of(match.firstPlayer())))
-            ).collect(Collectors.toList());
+            ).toList();
   }
 }

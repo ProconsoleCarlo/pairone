@@ -4,15 +4,14 @@ import it.proconsole.utility.pairone.adapter.datastore.model.DeveloperEntity;
 import it.proconsole.utility.pairone.core.model.Developer;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DeveloperAdapter {
   public List<DeveloperEntity> fromDomain(List<Developer> developers, Long teamId) {
-    return developers.stream().map(it -> fromDomain(it, teamId)).collect(Collectors.toList());
+    return developers.stream().map(it -> fromDomain(it, teamId)).toList();
   }
 
   public List<DeveloperEntity> fromDomain(List<Developer> developers) {
-    return developers.stream().map(this::fromDomain).collect(Collectors.toList());
+    return developers.stream().map(this::fromDomain).toList();
   }
 
   public DeveloperEntity fromDomain(Developer developer) {
@@ -20,7 +19,7 @@ public class DeveloperAdapter {
   }
 
   public List<Developer> toDomain(List<DeveloperEntity> developers) {
-    return developers.stream().map(this::toDomain).collect(Collectors.toList());
+    return developers.stream().map(this::toDomain).toList();
   }
 
   public Developer toDomain(DeveloperEntity developer) {

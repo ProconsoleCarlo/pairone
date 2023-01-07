@@ -38,8 +38,7 @@ public class TeamEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof TeamEntity)) return false;
-    TeamEntity that = (TeamEntity) o;
+    if (!(o instanceof TeamEntity that)) return false;
     return Objects.equals(id, that.id) && name.equals(that.name);
   }
 

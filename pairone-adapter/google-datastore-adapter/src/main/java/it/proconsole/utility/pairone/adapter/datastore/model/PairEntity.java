@@ -68,8 +68,7 @@ public class PairEntity {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PairEntity)) return false;
-    PairEntity that = (PairEntity) o;
+    if (!(o instanceof PairEntity that)) return false;
     return Objects.equals(id, that.id) && sprintId.equals(that.sprintId) && firstDeveloperId.equals(that.firstDeveloperId) && Objects.equals(secondDeveloperId, that.secondDeveloperId);
   }
 

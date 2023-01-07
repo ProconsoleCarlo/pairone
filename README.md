@@ -31,7 +31,7 @@ mvn spring-boot:run
 ```sh
 mvn clean package
 cd pairone-rest
-mvn appengine:deploy -Dapp.deploy.projectId=pairone
+mvn appengine:deploy
 ```
 
 ## 🤝 Contributing

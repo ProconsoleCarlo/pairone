@@ -1,7 +1,7 @@
 package it.proconsole.utility.pairone.adapter.datastore.model;
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
-import it.proconsole.utility.pairone.core.Generated;
+import it.proconsole.utility.pairone.core.util.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.lang.Nullable;
 

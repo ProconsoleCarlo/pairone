@@ -1,4 +1,4 @@
-package it.proconsole.utility.pairone.core;
+package it.proconsole.utility.pairone.core.util;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

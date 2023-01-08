@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import org.springframework.lang.Nullable;
 
+import javax.annotation.processing.Generated;
 import java.util.Objects;
 
 public class Developer {
@@ -49,6 +50,7 @@ public class Developer {
     return teamId;
   }
 
+  @Generated(value = "java.util.Objects.equals")
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -56,6 +58,7 @@ public class Developer {
     return Objects.equals(id, developer.id) && nickName.equals(developer.nickName) && Objects.equals(teamId, developer.teamId);
   }
 
+  @Generated(value = "java.util.Objects.hash")
   @Override
   public int hashCode() {
     return Objects.hash(id, nickName, teamId);

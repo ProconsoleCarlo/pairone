@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
@@ -8,22 +9,29 @@
     <module>pairone-rest</module>
     <module>pairone-core</module>
   </modules>
-  <parent> 
-    <groupId>org.springframework.boot</groupId>  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.6.4</version>
+    <version>2.7.7</version>
     <relativePath/>
-  </parent>  
-  <groupId>it.proconsole</groupId>  
-  <artifactId>PairOne</artifactId>  
-  <version>0.0.1-SNAPSHOT</version>  
-  <name>PairOne</name>  
-  <description>Project to generate pairs for agile teams</description>  
-  <properties> 
-    <java.version>11</java.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <spring-cloud-gcp.version>3.1.0</spring-cloud-gcp.version>
+  </parent>
+  <groupId>it.proconsole</groupId>
+  <artifactId>PairOne</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>PairOne</name>
+  <description>Project to generate pairs for agile teams</description>
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+
+    <spring-cloud-gcp.version>3.4.1</spring-cloud-gcp.version>
+    <appengine-maven-plugin.version>2.4.4</appengine-maven-plugin.version>
+    <jacoco.version>0.8.8</jacoco.version>
+
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.organization>proconsolecarlo</sonar.organization>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
   </properties>
 
   <dependencyManagement>
@@ -51,12 +59,7 @@
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
+      <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -67,14 +70,61 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
-        <version>2.4.1</version>
+        <version>${appengine-maven-plugin.version}</version>
         <configuration>
           <version>1</version>
           <projectId>pairone</projectId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>/*IT.java</include>
+            <include>/*ITKt.java</include>
+          </includes>
+          <excludes>
+            <exclude>/*Test.java</exclude>
+            <exclude>/*TestKt.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>/*Test.java</include>
+            <include>/*TestKt.java</include>
+          </includes>
+          <excludes>
+            <exclude>/*IT.java</exclude>
+            <exclude>/*ITKt.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>
@@ -100,4 +150,33 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+
+  <profiles>
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

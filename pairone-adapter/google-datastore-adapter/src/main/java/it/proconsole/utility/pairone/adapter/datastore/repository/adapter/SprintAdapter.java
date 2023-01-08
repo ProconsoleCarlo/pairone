@@ -5,13 +5,12 @@ import it.proconsole.utility.pairone.core.model.Pair;
 import it.proconsole.utility.pairone.core.model.Sprint;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SprintAdapter {
   public List<SprintEntity> fromDomain(List<Sprint> sprints, Long teamId) {
     return sprints.stream()
             .map(it -> fromDomain(it, teamId))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   public SprintEntity fromDomain(Sprint sprint, Long teamId) {

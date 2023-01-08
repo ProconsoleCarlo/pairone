@@ -6,7 +6,6 @@ import it.proconsole.scheduler.model.Round;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CircleRoundRobinScheduler<P> implements Scheduler<P> {
@@ -27,7 +26,7 @@ public class CircleRoundRobinScheduler<P> implements Scheduler<P> {
     var numberOfRounds = players.size() - 1;
     return IntStream.range(0, numberOfRounds).boxed()
             .map(round -> new Round<>((long) round + 1, getMatchesFor(players)))
-            .collect(Collectors.toList());
+            .toList();
   }
 
   private List<Match<P>> getMatchesFor(List<P> players) {
@@ -44,7 +43,7 @@ public class CircleRoundRobinScheduler<P> implements Scheduler<P> {
               } else {
                 return new Match<>(matchId, firstPlayer, secondPlayer);
               }
-            }).collect(Collectors.toList());
+            }).toList();
     Collections.rotate(players.subList(1, players.size()), 1);
     return matches;
   }

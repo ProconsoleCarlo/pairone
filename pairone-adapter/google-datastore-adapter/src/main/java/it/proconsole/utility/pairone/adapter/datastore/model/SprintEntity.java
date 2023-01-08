@@ -1,6 +1,7 @@
 package it.proconsole.utility.pairone.adapter.datastore.model;
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
+import it.proconsole.utility.pairone.core.util.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.lang.Nullable;
 
@@ -45,14 +46,15 @@ public class SprintEntity {
     this.round = round;
   }
 
+  @Generated
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof SprintEntity)) return false;
-    SprintEntity that = (SprintEntity) o;
+    if (!(o instanceof SprintEntity that)) return false;
     return Objects.equals(id, that.id) && teamId.equals(that.teamId) && round.equals(that.round);
   }
 
+  @Generated
   @Override
   public int hashCode() {
     return Objects.hash(id, teamId, round);

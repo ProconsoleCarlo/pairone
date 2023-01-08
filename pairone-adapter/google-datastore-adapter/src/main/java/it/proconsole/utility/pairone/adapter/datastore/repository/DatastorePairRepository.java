@@ -7,7 +7,6 @@ import it.proconsole.utility.pairone.core.repository.DeveloperRepository;
 import it.proconsole.utility.pairone.core.repository.PairRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DatastorePairRepository implements PairRepository {
   private final PairEntityRepository entityRepository;
@@ -35,7 +34,7 @@ public class DatastorePairRepository implements PairRepository {
             .map(entity -> {
               var developers = developerRepository.findAllById(entity.developerIds());
               return pairAdapter.toDomain(entity, developers);
-            }).collect(Collectors.toList());
+            }).toList();
   }
 
   @Override
@@ -46,8 +45,8 @@ public class DatastorePairRepository implements PairRepository {
                       .flatMap(it -> it.members().stream())
                       .filter(it -> entity.developerIds().contains(it.id()))
                       .distinct()
-                      .collect(Collectors.toList());
+                      .toList();
               return pairAdapter.toDomain(entity, developers);
-            }).collect(Collectors.toList());
+            }).toList();
   }
 }

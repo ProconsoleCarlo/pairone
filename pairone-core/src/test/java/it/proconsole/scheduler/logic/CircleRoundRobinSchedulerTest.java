@@ -5,7 +5,6 @@ import it.proconsole.scheduler.model.Round;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,28 +46,7 @@ class CircleRoundRobinSchedulerTest {
     assertEquals(expected, current);
   }
 
-  static class Player {
-    private final Long id;
+  record Player(Long id) {
 
-    public Player(Long id) {
-      this.id = id;
-    }
-
-    public Long id() {
-      return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof Player)) return false;
-      Player player = (Player) o;
-      return id.equals(player.id);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(id);
-    }
   }
 }

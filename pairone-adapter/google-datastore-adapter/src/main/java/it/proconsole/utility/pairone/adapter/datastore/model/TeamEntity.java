@@ -1,6 +1,7 @@
 package it.proconsole.utility.pairone.adapter.datastore.model;
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
+import it.proconsole.utility.pairone.core.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.lang.Nullable;
 
@@ -35,6 +36,7 @@ public class TeamEntity {
     this.name = name;
   }
 
+  @Generated
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -42,6 +44,7 @@ public class TeamEntity {
     return Objects.equals(id, that.id) && name.equals(that.name);
   }
 
+  @Generated
   @Override
   public int hashCode() {
     return Objects.hash(id, name);
